@@ -25,7 +25,7 @@ const ChangePassword = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div>  
     </>
   );
 };

@@ -112,7 +112,9 @@ const SendOtp = () => {
 
               <div class="form-row">
                 <button type="submit" className="btn">
-                  Send Otp
+                  {
+                    paraemail ? "Verify Otp" : "Send Otp"
+                  }
                 </button>
               </div>
             </form>
