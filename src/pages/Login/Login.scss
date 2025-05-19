@@ -1,21 +1,25 @@
-.login{
+.login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .login-cont {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    height: 70%;
+    width: 100%;
 
-    .login-cont{
-
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .left{
-            width: 60%;
-            padding: 10px;
-        }
-
-        .right{
-            width: 40%;
-            
-        }
+    .left {
+      width: 60%;
+      padding: 10px;
+      background: red;
     }
-    
+
+    .right {
+      width: 40%;
+      padding: 10px;
+      background: rgb(89, 0, 255);
+    }
+  }
 }
