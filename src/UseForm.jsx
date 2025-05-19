@@ -3,27 +3,27 @@ import React, { useEffect, useState } from "react";
 const UseForm = (formObj, validate, callback) => {
   const [values, setValues] = useState({});
   const [error, setError] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value.trim(" "),
     }));
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const validationErrors = validate(values);
     setError(validationErrors);
-    setIsSubmitting(true); 
+    setIsSubmitting(true);
   };
 
   useEffect(() => {
     if (isSubmitting && Object.keys(error).length === 0) {
       callback();
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
     }
   }, [error, isSubmitting]);
 
@@ -34,7 +34,7 @@ const UseForm = (formObj, validate, callback) => {
     setValues,
     error,
     setError,
-    isSubmitting
+    isSubmitting,
   };
 };
 
