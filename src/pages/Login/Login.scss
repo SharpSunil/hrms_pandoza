@@ -9,17 +9,34 @@
     justify-content: center;
     height: 70%;
     width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0px;
+  
 
     .left {
       width: 60%;
-      padding: 10px;
-      background: red;
+      background: rgb(118, 134, 189);
     }
 
     .right {
       width: 40%;
-      padding: 10px;
-      background: rgb(89, 0, 255);
+      padding: 20px;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--unit));
+      align-items: center;
+      justify-content: center;
+
+      p{
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        cursor: pointer;
+       
+      }
+
     }
   }
 }
