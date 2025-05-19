@@ -2,8 +2,7 @@ import React from 'react'
 
 import './App.scss'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import ContextProvider from '../Context'
-
+import ContextProvider from '../../jungle boosh/seller_jb_frontend/src/Context'
 
 function App() {
 
@@ -13,7 +12,7 @@ function App() {
     <ContextProvider>
      <BrowserRouter>
       <Routes>
-        <Route/>
+        <Route path='/login' element={<Login />}/>
       </Routes>
       </BrowserRouter>
     </ContextProvider>
