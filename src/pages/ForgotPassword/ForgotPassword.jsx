@@ -12,10 +12,7 @@ function ForgotPassword() {
             <h2>Forgot Pasword</h2>
             <form action="">
               <div class="form-row">
-                <Input
-                  label="Password"
-                  placeholder="Enter your password"
-                />
+                <Input label="Password" placeholder="Enter your password" />
               </div>
 
               <div class="form-row">
