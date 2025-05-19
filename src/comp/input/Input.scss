@@ -9,6 +9,10 @@
 
   label {
     font-size: calc(var(--unit));
+
+    &.label_error {
+      color: orangered;
+    }
   }
   .wraper {
     width: 100%;
@@ -17,11 +21,11 @@
       width: 100%;
       height: 40px;
       outline: none;
-      // border: 1px solid grey;
+      border: 1px solid grey;
       border-radius: 8px;
       padding: 20px 10px;
       background-color: #efeeea;
-      border: none;
+
 
       &.error {
         border-color: orangered;
@@ -30,8 +34,6 @@
       &:focus {
         border-color: var(--accent);
       }
-
-      
     }
 
     .eye-icon {

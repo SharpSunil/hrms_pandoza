@@ -34,6 +34,7 @@ const UseForm = (formObj, validate, callback) => {
     setValues,
     error,
     setError,
+    isSubmitting
   };
 };
 

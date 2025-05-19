@@ -12,19 +12,21 @@ const Input = ({
   placeholder,
   error,
   password,
+  disabled
 }) => {
   const [eyeOpen, setEyeOpen] = useState(false);
 
   return (
     <>
       <div class="input">
-        <label for="">{label}</label>
+        <label className={error ? "label_error" : ""} htmlFor={name}>{error ? error : label}</label>
         <div class="wraper">
           <input
             className={error ? "error" : ""}
             value={value}
             name={name}
             placeholder={placeholder}
+            disabled={disabled}
             onChange={onchange}
             type={`${eyeOpen ? "text" : type}`}
           />
