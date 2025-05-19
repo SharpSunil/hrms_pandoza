@@ -4,6 +4,7 @@ import './App.scss'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ContextProvider from '../Context'
 import SendOtp from './pages/SendOtp/SendOtp'
+import Login from './pages/Login/Login'
 
 
 function App() {
