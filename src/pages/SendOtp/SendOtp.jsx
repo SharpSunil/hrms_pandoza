@@ -10,6 +10,7 @@ const SendOtp = () => {
   const [loader, setLoader] = useState(false);
   const formObj = {
     email: "",
+    otp: "",
   };
   const validateError = (value) => {
     let errors = {};
@@ -24,18 +25,37 @@ const SendOtp = () => {
   const sendOtp = async () => {
     try {
       setLoader(true);
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}user/SendOtp?Email=${values.email}`
-      );
 
-      if (response.status === 200) {
-        window.location.href = `/otp?email=${values.email}`;
+      let response;
+      if (paraemail) {
+        response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}user/VerifyOtp?Email=${
+            values.email
+          }&Otp=${values.otp}`
+        );
 
+        if (response.status === 200) {
+          window.location.href = `/change-password`;
+        }
+      } else {
+        response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}user/SendOtp?Email=${
+            values.email
+          }`
+        );
+
+        if (response.status === 200) {
+          window.location.href = `/otp?email=${values.email}`;
+        }
       }
     } catch (error) {
       console.log(error);
       if (error.status === 404) {
         setError({ email: "User Not Found" });
+      }
+
+      if (error.status === 400) {
+        setError({ otp: "Invalid Otp" });
       }
     } finally {
       setLoader(false);
@@ -45,14 +65,14 @@ const SendOtp = () => {
   const { handleChange, handleSubmit, values, error, setError, setValues } =
     UseForm(formObj, validateError, sendOtp);
 
-useEffect(()=>{
-    if(paraemail){
-        setValues((prev)=>({
-            ...prev,
-            email:paraemail
-        }))
+  useEffect(() => {
+    if (paraemail) {
+      setValues((prev) => ({
+        ...prev,
+        email: paraemail,
+      }));
     }
-},[paraemail])
+  }, [paraemail]);
 
   return (
     <>
@@ -69,6 +89,7 @@ useEffect(()=>{
                   placeholder="Enter Your Email"
                   name="email"
                   value={values.email}
+                  type="email"
                   onchange={handleChange}
                   error={error.email}
                   disabled={paraemail}
@@ -77,11 +98,14 @@ useEffect(()=>{
 
               {paraemail && (
                 <div class="form-row otp-row">
-                  <label for="">Enter Otp</label>
+                  <label style={{color : `${error.otp ? "orangered" : ""}`}} for=""> {error.otp ? "Invalid Otp" : "Enter Otp"} </label>
                   <OTPInput
                     inputType="number"
                     numInputs={5}
+                    name="otp"
                     renderInput={(props) => <input {...props} />}
+                    value={values.otp}
+                    onChange={(otp) => setValues({ ...values, otp })}
                   />
                 </div>
               )}
