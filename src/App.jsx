@@ -2,17 +2,21 @@ import React from 'react'
 
 import './App.scss'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import ContextProvider from '../../jungle boosh/seller_jb_frontend/src/Context'
 
 function App() {
 
 
   return (
     <>
-      <BrowserRouter>
+    <ContextProvider>
+     <BrowserRouter>
       <Routes>
         <Route/>
       </Routes>
       </BrowserRouter>
+    </ContextProvider>
+ 
     </>
   )
 }
