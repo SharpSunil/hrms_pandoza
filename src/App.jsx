@@ -2,7 +2,8 @@ import React from 'react'
 
 import './App.scss'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import ContextProvider from '../../jungle boosh/seller_jb_frontend/src/Context'
+import ContextProvider from '../Context'
+
 
 function App() {
 

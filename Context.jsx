@@ -4,7 +4,7 @@ import { createContext } from "react";
 
 export const UserContext = createContext();
 
-const contextProvider = ({children})=>{
+const ContextProvider = ({children})=>{
 
     return(
         <UserContext.Provider>
@@ -13,4 +13,4 @@ const contextProvider = ({children})=>{
     )
 }
 
-export default contextProvider
+export default ContextProvider
