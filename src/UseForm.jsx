@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from "react";
 
-const UseForm = (formObj,validate,callback) => {
+const UseForm = (formObj, validate, callback) => {
   const [values, setValues] = useState({});
   const [error, setError] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
-  const handleChange = (e)=>{
-    const {name,value} = e.target;
-
-    setValues({
-        ...values,
-        [name]:value
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-   setError(validate(values));
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  useEffect(()=>{
-    if(Object.keys(error).length === 0){
-        callback();
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    const validationErrors = validate(values);
+    setError(validationErrors);
+    setIsSubmitting(true); 
+  };
 
+  useEffect(() => {
+    if (isSubmitting && Object.keys(error).length === 0) {
+      callback();
+      setIsSubmitting(false); 
     }
-  },[error]);
+  }, [error, isSubmitting]);
 
   return {
     handleChange,
@@ -32,8 +33,8 @@ const UseForm = (formObj,validate,callback) => {
     values,
     setValues,
     error,
-    setError
-  }
+    setError,
+  };
 };
 
 export default UseForm;
