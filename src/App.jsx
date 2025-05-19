@@ -2,7 +2,9 @@ import React from 'react'
 
 import './App.scss'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import ContextProvider from '../../jungle boosh/seller_jb_frontend/src/Context'
+import ContextProvider from '../Context'
+import SendOtp from './pages/SendOtp/SendOtp'
+
 
 function App() {
 
@@ -13,6 +15,7 @@ function App() {
      <BrowserRouter>
       <Routes>
         <Route path='/login' element={<Login />}/>
+        <Route path='/otp' element={<SendOtp />}/>
       </Routes>
       </BrowserRouter>
     </ContextProvider>
