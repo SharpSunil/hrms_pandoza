@@ -52,7 +52,7 @@ useEffect(()=>{
             email:paraemail
         }))
     }
-})
+},[paraemail])
 
   return (
     <>
