@@ -35,7 +35,7 @@ const SendOtp = () => {
         );
 
         if (response.status === 200) {
-          window.location.href = `/change-password`;
+          window.location.href = `/change-password?email=${paraemail}`;
         }
       } else {
         response = await axios.post(
@@ -112,7 +112,9 @@ const SendOtp = () => {
 
               <div class="form-row">
                 <button type="submit" className="btn">
-                  Send Otp
+                  {
+                    paraemail ? "Verify Otp" : "Send Otp"
+                  }
                 </button>
               </div>
             </form>
