@@ -6,17 +6,44 @@ import SendOtp from "./pages/SendOtp/SendOtp";
 import Login from "./pages/Login/Login";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ChangePassword from "./pages/ChangePasword/ChangePassword";
+import  PrivateRoute  from "./routes/PrivateRoute";
 
 function App() {
+  const pages = [
+    {
+      component: Login,
+      path: "/login",
+      replace: true,
+    },
+    {
+      component: SendOtp,
+      path: "/otp",
+      replace: true,
+    },
+    {
+      component: ForgotPassword,
+      path: "/forgot-password",
+      replace: true,
+    },
+    {
+      component: ChangePassword,
+      path: "/change-password",
+      replace: true,
+    },
+  ];
+
   return (
     <>
       <ContextProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/otp" element={<SendOtp />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/change-password" element={<ChangePassword />} />
+            {pages.map((item, index) => (
+              <Route
+                key={index}
+                path={item.path}
+                element={<PrivateRoute>{<item.component />}</PrivateRoute>}
+              />
+            ))}
           </Routes>
         </BrowserRouter>
       </ContextProvider>
