@@ -4,13 +4,17 @@ import axios from "axios";
 import UseForm from "../../UseForm";
 import changePasswordValidation from "../../validation/ChangePassword";
 import Input from "../../comp/input/Input";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 
 const ChangePassword = () => {
   const [searchParams] = useSearchParams();
 
   const paramsEmail = searchParams.get("email");
-const [status,setStatus] = useState(false)
+  const [status, setStatus] = useState(false);
+
+  if (!paramsEmail) {
+    return <Navigate to="/login" replace />;
+  }
 
   const formObj = {
     email: "",
@@ -34,7 +38,7 @@ const [status,setStatus] = useState(false)
       }
       if (error.status === 400) {
         setError({ newPassword: "Old and new password must differ." });
-        setStatus(true)
+        setStatus(true);
       }
     }
   };
@@ -55,7 +59,7 @@ const [status,setStatus] = useState(false)
     <>
       <div className="parent changepassword">
         <div className="cont changepassword-cont">
-          <div class="left"></div>
+          <div class="left bg-img-cover"></div>
           <div class="right">
             <h2>Change Password</h2>
             <form action="" onSubmit={handleSubmit}>

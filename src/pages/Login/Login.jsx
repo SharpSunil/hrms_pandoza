@@ -41,7 +41,7 @@ const Login = () => {
     <>
       <div className="parent login">
         <div className="cont login-cont">
-          <div className="left">left</div>
+          <div className="left bg-img-cover"></div>
           <form className="right" onSubmit={handleSubmit}>
             <h2>Login</h2>
             <div className="form-row">

@@ -79,7 +79,7 @@ const SendOtp = () => {
       {loader && <Loader />}
       <div class="send_otp_parent parent">
         <div class="send_otp_cont cont">
-          <div class="left_side"></div>
+          <div class="left_side bg-img-cover"></div>
           <div class="right_side">
             <h2>Send Otp</h2>
             <form action="" onSubmit={handleSubmit}>

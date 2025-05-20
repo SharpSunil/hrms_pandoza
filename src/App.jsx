@@ -4,9 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ContextProvider from "../Context";
 import SendOtp from "./pages/SendOtp/SendOtp";
 import Login from "./pages/Login/Login";
-import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ChangePassword from "./pages/ChangePasword/ChangePassword";
-import  PrivateRoute  from "./routes/PrivateRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   const pages = [
@@ -21,11 +20,6 @@ function App() {
       replace: true,
     },
     {
-      component: ForgotPassword,
-      path: "/forgot-password",
-      replace: true,
-    },
-    {
       component: ChangePassword,
       path: "/change-password",
       replace: true,
@@ -37,6 +31,9 @@ function App() {
       <ContextProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/otp" element={<SendOtp />} />
+            <Route path="/change-password" element={<ChangePassword />} />
             {pages.map((item, index) => (
               <Route
                 key={index}
