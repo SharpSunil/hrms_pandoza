@@ -18,6 +18,9 @@ const Login = () => {
         values
       );
       if (response.status === 200) {
+        const {token, uid} = response.data.data
+        localStorage.setItem("token",token );
+        localStorage.setItem("id",uid );
         window.location.href = "/";
       }
     } catch (error) {

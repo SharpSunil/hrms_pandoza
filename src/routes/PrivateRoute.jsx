@@ -1,14 +1,11 @@
-import React, { Children } from 'react'
+import React, { Children } from "react";
 
-const PrivateRoute = ({Children}) => {
+const PrivateRoute = ({ Children }) => {
+  const id = localStorage.getItem("id");
 
-    if(!localStorage.getItem('token')) return <Navigate to="/login" replace />
-    
-  return (
-    <>
-      {Children}
-    </>
-  )
-}
+  if (!id) return <Navigate to="/login" replace />;
 
-export default PrivateRoute
+  return <>{Children}</>;
+};
+
+export default PrivateRoute;
