@@ -89,6 +89,15 @@ const ChangePassword = () => {
                 Update Password
               </button>
               {status && <Link to="/login">Back To Login</Link>}
+
+              <div class="btn-wrapper">
+                <Link to="/login" class="back-btn">
+                  {/* <span>
+                                  <IoChevronBackSharp />
+                                </span> */}
+                  <p>Back to login</p>
+                </Link>
+              </div>
             </form>
           </div>
         </div>

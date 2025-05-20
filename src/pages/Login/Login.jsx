@@ -18,9 +18,9 @@ const Login = () => {
         values
       );
       if (response.status === 200) {
-        const {token, uid} = response.data.data
-        localStorage.setItem("token",token );
-        localStorage.setItem("id",uid );
+        const { token, uid } = response.data.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("id", uid);
         window.location.href = "/";
       }
     } catch (error) {
@@ -67,7 +67,7 @@ const Login = () => {
               />
             </div>
             <a href="/otp">Forgot Password?</a>
-            <button class="btn" type="submit">
+            <button class="btn login-btn" type="submit">
               Login
             </button>
           </form>
