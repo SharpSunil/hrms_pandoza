@@ -1,6 +1,6 @@
 :root {
-  --accent: #273f4f;
-  --accent-light: #f7f9fb;
+  --accent: #1B56FD;
+  --accent-light: #AFDDFF;
   --black: #0a0c00;
   --white: #fff;
   --grey: #f0f0f0;
@@ -52,8 +52,6 @@ p,
 strong {
   line-height: 150%;
   letter-spacing: 1px;
-  word-spacing: 2px;
-  // font-size: clamp(0.95rem, 0.95rem + 0.25vw, 1rem);
   max-width: 65ch;
   text-align: center;
   font-weight: 100;
@@ -85,17 +83,17 @@ h6 {
   }
 }
 
-h2{
+h2 {
   font-size: 35px;
   font-weight: 700;
 }
 
 .btn {
-  width: auto;
+  width: 100%;
   background-color: var(--accent);
-  padding: 10px 20px;
+  // padding: 8px 20px;
   color: var(--white);
-  border-radius: 8px;
+  border-radius: 5px;
   border: 1px solid var(--accent);
   transition: var(--trans-q);
   display: flex;
@@ -103,7 +101,7 @@ h2{
   align-items: center;
   cursor: pointer;
   font-size: 20px;
-  height: 50px;
+  height: 40px;
 
   &:hover {
     background-color: transparent;
@@ -115,7 +113,7 @@ h2{
   width: 100%;
 }
 
-.bg-img-cover{
+.bg-img-cover {
   background-repeat: no-repeat !important;
   background-position: center center !important;
   background-size: cover !important;

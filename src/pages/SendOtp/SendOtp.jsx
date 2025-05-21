@@ -3,9 +3,11 @@ import "./SendOtp.scss";
 import Input from "../../comp/input/Input";
 import OTPInput from "react-otp-input";
 import UseForm from "../../UseForm";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../comp/loader/Loader";
+import { IoChevronBackSharp } from "react-icons/io5";
+
 const SendOtp = () => {
   const [loader, setLoader] = useState(false);
   const formObj = {
@@ -98,7 +100,13 @@ const SendOtp = () => {
 
               {paraemail && (
                 <div class="form-row otp-row">
-                  <label style={{color : `${error.otp ? "orangered" : ""}`}} for=""> {error.otp ? "Invalid Otp" : "Enter Otp"} </label>
+                  <label
+                    style={{ color: `${error.otp ? "orangered" : ""}` }}
+                    for=""
+                  >
+                    {" "}
+                    {error.otp ? "Invalid Otp" : "Enter Otp"}{" "}
+                  </label>
                   <OTPInput
                     inputType="number"
                     numInputs={5}
@@ -112,10 +120,17 @@ const SendOtp = () => {
 
               <div class="form-row">
                 <button type="submit" className="btn">
-                  {
-                    paraemail ? "Verify Otp" : "Send Otp"
-                  }
+                  {paraemail ? "Verify Otp" : "Send Otp"}
                 </button>
+              </div>
+
+              <div class="btn-wrapper">
+                <Link to="/login" class="back-btn">
+                  {/* <span>
+                    <IoChevronBackSharp />
+                  </span> */}
+                  <p>Back to login</p>
+                </Link>
               </div>
             </form>
           </div>
