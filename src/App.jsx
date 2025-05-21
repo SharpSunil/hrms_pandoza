@@ -6,7 +6,7 @@ import SendOtp from "./pages/SendOtp/SendOtp";
 import Login from "./pages/Login/Login";
 import ChangePassword from "./pages/ChangePasword/ChangePassword";
 import PrivateRoute from "./routes/PrivateRoute";
-import AddEmp from "./pages/add_employee/AddEmp";
+import addEmp from "../src/pages/add_employee/AddEmp"
 
 function App() {
   const pages = [
@@ -35,21 +35,13 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/otp" element={<SendOtp />} />
             <Route path="/change-password" element={<ChangePassword />} />
-      
-            {pages.map((item, index) => {
-              const Component = item.component;
-              return (
-                <Route
-                  key={index}
-                  path={item.path}
-                  element={
-                    <PrivateRoute>
-                      <Component />
-                    </PrivateRoute>
-                  }
-                />
-              );
-            })}
+            {pages.map((item, index) => (
+              <Route
+                key={index}
+                path={item.path}
+                element={<PrivateRoute>{<item.component />}</PrivateRoute>}
+              />
+            ))}
           </Routes>
         </BrowserRouter>
       </ContextProvider>
