@@ -6,12 +6,13 @@ import SendOtp from "./pages/SendOtp/SendOtp";
 import Login from "./pages/Login/Login";
 import ChangePassword from "./pages/ChangePasword/ChangePassword";
 import PrivateRoute from "./routes/PrivateRoute";
+import addEmp from "../src/pages/add_employee/AddEmp"
 
 function App() {
   const pages = [
     {
-      component: Login,
-      path: "/login",
+      component: addEmp,
+      path: "/add_employee",
       replace: true,
     },
     {
