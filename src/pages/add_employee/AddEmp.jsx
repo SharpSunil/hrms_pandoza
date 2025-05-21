@@ -5,6 +5,7 @@ const AddEmp = () => {
   return (
     <>
       <Page_Comp/>
+      
     </>
   )
 }
