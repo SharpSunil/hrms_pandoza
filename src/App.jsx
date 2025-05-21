@@ -6,7 +6,8 @@ import SendOtp from "./pages/SendOtp/SendOtp";
 import Login from "./pages/Login/Login";
 import ChangePassword from "./pages/ChangePasword/ChangePassword";
 import PrivateRoute from "./routes/PrivateRoute";
-import AddEmp from "../src/pages/add_employee/AddEmp"
+import AddEmp from "../src/pages/add_employee/AddEmp";
+
 
 function App() {
   const pages = [
@@ -31,18 +32,20 @@ function App() {
     <>
       <ContextProvider>
         <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/otp" element={<SendOtp />} />
-            <Route path="/change-password" element={<ChangePassword />} />
-            {pages.map((item, index) => (
-              <Route
-                key={index}
-                path={item.path}
-                element={<PrivateRoute>{<item.component />}</PrivateRoute>}
-              />
-            ))}
-          </Routes>
+    
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/otp" element={<SendOtp />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+              {pages.map((item, index) => (
+                <Route
+                  key={index}
+                  path={item.path}
+                  element={<PrivateRoute>{<item.component />}</PrivateRoute>}
+                />
+              ))}
+            </Routes>
+    
         </BrowserRouter>
       </ContextProvider>
     </>

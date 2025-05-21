@@ -19,8 +19,8 @@ const Input = ({
   return (
     <>
       <div class="input">
-        <label className={error ? "label_error" : ""} htmlFor={name}>
-          {error ? error : label}
+        <label htmlFor={name}>
+         {label}
         </label>
         <div class="wraper">
           <input
@@ -32,6 +32,8 @@ const Input = ({
             onChange={onchange}
             type={`${eyeOpen ? "text" : type}`}
           />
+
+          {error && <small className="label_error" >{error}</small>}
           {password && (
             <span className="eye-icon" onClick={() => setEyeOpen(!eyeOpen)}>
               {eyeOpen ? <PiEyeLight /> : <PiEyeSlash />}
