@@ -2,58 +2,57 @@ import React from "react";
 import "./AddEmp.scss";
 import Input from "../../comp/input/Input";
 import UseForm from "../../UseForm";
+import AddEmployeeValidation from "../../validation/AddEmployee";
 import axios from "axios";
 
 const AddEmp = () => {
+  const formObj = {
+    employeeName: "",
+    employeeId: "",
+    employeeStatus: "",
+    designation: "",
+    department: "",
+    dateOfJoining: "",
+    dateOfLiving: "",
+    attendanceCode: "",
+    gender: "",
+    contactNumber: "",
+    email: "",
+    dateOfBirth: "",
+    aadharNumber: "",
+    panNumber: "",
+    accountNumber: "",
+    ifscCode: "",
+    bankName: "",
+    companyName: "",
+    employeeSalary: "",
+    costtoCompany: "",
+    diduction: "",
+    employeeImage: "",
+    address: "",
+    uanNo: "",
+  };
 
 
-const formObj = {
-  employeeName: "",
-  employeeId: "",
-  employeeStatus: "", 
-  designation: "",
-  department: "",
-  dateOfJoining: "",
-  dateOfLiving: "",
-  attendanceCode: "",
-  gender: "",
-  contactNumber: "",
-  email: "",
-  dateOfBirth: "",
-  aadharNumber: "",
-  panNumber: "",
-  accountNumber: "",
-  ifscCode: "",
-  bankName: "",
-  companyName: "",
-  employeeSalary: "",
-  costtoCompany: "",
-  diduction: "",
-  employeeImage: "",
-  address: "",
-  uanNo: "",
-};
-
-
-
+  const token = localStorage.getItem("token");
 
   const addEmployeeData = async () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}Admin/AddEmployee`,
-        values
+        values,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-
-      console.log(response,">>>>>>");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const { handleChange, handleSubmit, values, setValues, error, setError } = UseForm(
-    formObj,
-    addEmployeeData,
-  );
+  const { handleChange, handleSubmit, values, setValues, error, setError } =
+    UseForm(formObj, AddEmployeeValidation, addEmployeeData);
 
   return (
     <>
@@ -68,7 +67,8 @@ const formObj = {
                   label="Employee Name"
                   name="employeeName"
                   value={values.employeeName}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.employeeName}
                 />
               </div>
               <div class="half-row">
@@ -77,7 +77,8 @@ const formObj = {
                   label="Employee Id"
                   name="employeeId"
                   value={values.employeeId}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.employeeId}
                 />
               </div>
             </div>
@@ -88,7 +89,8 @@ const formObj = {
                   label="Employee Status"
                   name="employeeStatus"
                   value={values.employeeStatus}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.employeeStatus}
                 />
               </div>
               <div class="half-row">
@@ -97,7 +99,8 @@ const formObj = {
                   label="Designation"
                   name="designation"
                   value={values.designation}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.designation}
                 />
               </div>
             </div>
@@ -108,7 +111,8 @@ const formObj = {
                   label="Department"
                   name="department"
                   value={values.department}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.department}
                 />
               </div>
               <div class="half-row">
@@ -118,7 +122,8 @@ const formObj = {
                   name="dateOfJoining"
                   type="date"
                   value={values.dateOfJoining}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.dateOfJoining}
                 />
               </div>
             </div>
@@ -130,7 +135,8 @@ const formObj = {
                   name="dateOfLiving"
                   type="date"
                   value={values.dateOfLiving}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.dateOfLiving}
                 />
               </div>
               <div class="half-row">
@@ -139,7 +145,8 @@ const formObj = {
                   label="Attendance Code"
                   name="attendanceCode"
                   value={values.attendanceCode}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.attendanceCode}
                 />
               </div>
             </div>
@@ -149,8 +156,9 @@ const formObj = {
                   placeholder="Gender"
                   label="Gender"
                   value={values.gender}
-                  onChange={handleChange}
+                  onchange={handleChange}
                   name="gender"
+                  error={error.gender}
                 />
               </div>
               <div class="half-row">
@@ -159,7 +167,9 @@ const formObj = {
                   label="Contact Number"
                   name="contactNumber"
                   value={values.contactNumber}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  maxLength="10"
+                  error={error.contactNumber}
                 />
               </div>
             </div>
@@ -170,7 +180,8 @@ const formObj = {
                   label="Email"
                   name="email"
                   value={values.email}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.email}
                 />
               </div>
               <div class="half-row">
@@ -180,7 +191,8 @@ const formObj = {
                   name="dateOfBirth"
                   type="date"
                   value={values.dateOfBirth}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.dateOfBirth}
                 />
               </div>
             </div>
@@ -191,7 +203,8 @@ const formObj = {
                   label="Aadhar Number"
                   name="aadharNumber"
                   value={values.aadharNumber}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.aadharNumber}
                 />
               </div>
               <div class="half-row">
@@ -200,7 +213,8 @@ const formObj = {
                   label="Pan Number"
                   name="panNumber"
                   value={values.panNumber}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.panNumber}
                 />
               </div>
             </div>
@@ -211,7 +225,8 @@ const formObj = {
                   label="Bank Account Number"
                   name="accountNumber"
                   value={values.accountNumber}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.accountNumber}
                 />
               </div>
               <div class="half-row">
@@ -220,7 +235,8 @@ const formObj = {
                   label="Ifsc Code"
                   name="ifscCode"
                   value={values.ifscCode}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.ifscCode}
                 />
               </div>
             </div>
@@ -231,7 +247,8 @@ const formObj = {
                   label="Bank Name"
                   name="bankName"
                   value={values.bankName}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.bankName}
                 />
               </div>
               <div class="half-row">
@@ -240,7 +257,8 @@ const formObj = {
                   label="Company Name"
                   name="companyName"
                   value={values.companyName}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.companyName}
                 />
               </div>
             </div>
@@ -251,7 +269,8 @@ const formObj = {
                   label="Employee Salary"
                   name="employeeSalary"
                   value={values.employeeSalary}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.employeeSalary}
                 />
               </div>
               <div class="half-row">
@@ -259,8 +278,9 @@ const formObj = {
                   placeholder="Cost To Company"
                   label="Cost To Company"
                   name="costtoCompany"
-                  value={values.employeeId}
-                  onChange={handleChange}
+                  value={values.costtoCompany}
+                  onchange={handleChange}
+                  error={error.costtoCompany}
                 />
               </div>
             </div>
@@ -271,7 +291,8 @@ const formObj = {
                   label="Deduction"
                   name="diduction"
                   value={values.diduction}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.diduction}
                 />
               </div>
               <div class="half-row">
@@ -281,7 +302,8 @@ const formObj = {
                   label="Employee Image"
                   name="employeeImage"
                   value={values.employeeImage}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.employeeImage}
                 />
               </div>
             </div>
@@ -292,7 +314,8 @@ const formObj = {
                   label="Address"
                   name="address"
                   value={values.address}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.address}
                 />
               </div>
               <div class="half-row">
@@ -301,13 +324,16 @@ const formObj = {
                   label="UAN Number"
                   name="uanNo"
                   value={values.uanNo}
-                  onChange={handleChange}
+                  onchange={handleChange}
+                  error={error.uanNo}
                 />
               </div>
             </div>
 
             <div class="form-row">
-              <button class="btn" type="submit">Submit</button>
+              <button class="btn" type="submit">
+                Submit
+              </button>
             </div>
           </form>
         </div>

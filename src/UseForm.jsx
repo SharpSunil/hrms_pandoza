@@ -6,10 +6,11 @@ const UseForm = (formObj, validate, callback) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, files } = e.target;
+  
     setValues((prev) => ({
       ...prev,
-      [name]: value.trim(" "),
+      [name]: type === "file" ? files[0] : value.trim(),
     }));
   };
 
