@@ -1,26 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ContextProvider from "../Context";
+
 import SendOtp from "./pages/SendOtp/SendOtp";
 import Login from "./pages/Login/Login";
 import ChangePassword from "./pages/ChangePasword/ChangePassword";
 import PrivateRoute from "./routes/PrivateRoute";
 import AddEmp from "../src/pages/add_employee/AddEmp";
-
+import { UserContext } from "../Context";
+import Employees from "./pages/table/Employees"
+import EmployeeRoute from "./routes/EmployeeRoute";
 
 function App() {
-  const pages = [
-    {
-      component: AddEmp,
-      path: "/add_employee",
-      replace: true,
-    },
-    {
-      component: SendOtp,
-      path: "/otp",
-      replace: true,
-    },
+  const { user, loading } = useContext(UserContext);
+
+  const Employeepages = [
+   
     {
       component: ChangePassword,
       path: "/change-password",
@@ -28,26 +23,62 @@ function App() {
     },
   ];
 
+  const AdminPages = [
+     {
+      component: AddEmp,
+      path: "/add_employee",
+      replace: true,
+    },
+    {
+      component: Employees,
+      path: "/Employees",
+      replace: true,
+    },
+    {
+      component: ChangePassword,
+      path: "/change-password",
+      replace: true,
+    },
+  ]
+
+  if (loading) {
+    
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <ContextProvider>
-        <BrowserRouter>
-    
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/otp" element={<SendOtp />} />
-              <Route path="/change-password" element={<ChangePassword />} />
-              {pages.map((item, index) => (
+      <BrowserRouter>
+        <Routes>
+          {user ? (
+            <>
+              <Route path="/login" element={<Login />} replace />
+              {AdminPages.map((item, index) => (
                 <Route
                   key={index}
                   path={item.path}
                   element={<PrivateRoute>{<item.component />}</PrivateRoute>}
                 />
               ))}
-            </Routes>
-    
-        </BrowserRouter>
-      </ContextProvider>
+              {Employeepages.map((item, index) => (
+                <Route
+                  key={index}
+                  path={item.path}
+                  element={<EmployeeRoute>{<item.component />}</EmployeeRoute>}
+                />
+              ))}
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Login />} replace />
+              <Route path="/otp" element={<SendOtp />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+
+              <Route path="*" element={<Login />} />
+            </>
+          )}
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

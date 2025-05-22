@@ -4,36 +4,62 @@ import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext();
 
 const ContextProvider = ({ children }) => {
-  const [user, setUser] = useState();
+const [user, setUser] = useState();
+const [loading, setLoading] = useState(true);
 
-  const token = localStorage.getItem("token");
-  const id = localStorage.getItem("id");
+  const role = localStorage.getItem("role");
 
-  const getUserData = async () => {
+  const getUserData = async (id, token) => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}user/getUserById/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      let response;
+      if (role === "EMPLOYEE") {
+        response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}Employee/getUserById/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } else if (role === "ADMIN") {
+        response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}Admin/getUserById/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      }
 
-      console.log("Content-Type:", response.headers["content-type"]);
-      console.log("Raw Data:", response.data);
+
+
+     setUser(response.data.data);
     } catch (error) {
       console.log("ERROR:", error);
     }
   };
 
-  useEffect(() => {
-    getUserData();
-  }, []);
+
+
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  const id = localStorage.getItem("id");
+
+  const fetchData = async () => {
+    if (id && token) {
+      await getUserData(id, token);
+    }
+    setLoading(false); // done loading
+  };
+
+  fetchData();
+}, []);
 
   return (
-    <UserContext.Provider value={{ user, getUserData }}>
+    <UserContext.Provider value={{ user,loading, getUserData }}>
       {children}
     </UserContext.Provider>
   );
