@@ -14,14 +14,14 @@ const Login = () => {
   const loginForm = async () => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}user/Login`,
+        `${import.meta.env.VITE_BACKEND_URL}AuthController/Login`,
         values
       );
       if (response.status === 200) {
         const { token, uid } = response.data.data;
         localStorage.setItem("token", token);
         localStorage.setItem("id", uid);
-        window.location.href = "/";
+        // window.location.href = "/";
       }
     } catch (error) {
       console.log(error);
