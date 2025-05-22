@@ -61,7 +61,7 @@ function TableComponent({ columns, data }) {
   return (
     <>
       <Table
- 
+        scroll={{ x: "max-content" }}
         columns={columns}
         rowKey={(record) => record.id}
         dataSource={data}

@@ -1,27 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Table.scss";
 import TableComponent from "../../comp/table/TableComponent";
 import axios from "axios";
+import { UserContext } from "../../../Context";
 
 function Employees() {
+  const { user } = useContext(UserContext);
+  const [data, setData] = useState([]);
   const columns = [
     {
       title: "Employee Name",
-      dataIndex: "name",
+      dataIndex: "employeeName",
       sorter: true,
       width: "auto",
       fixed: "left",
     },
     {
       title: "Employee Id",
-      dataIndex: "employee_id",
+      dataIndex: "employeeId",
       sorter: true,
       width: "auto",
       fixed: "left",
     },
     {
       title: "Attendance Code",
-      dataIndex: "attendance_code",
+      dataIndex: "attendanceCode",
       sorter: true,
       width: "auto",
     },
@@ -37,7 +40,7 @@ function Employees() {
 
     {
       title: "Employee Status",
-      dataIndex: "employee_status",
+      dataIndex: "employeeStatus",
       sorter: true,
       width: "auto",
     },
@@ -55,19 +58,19 @@ function Employees() {
     },
     {
       title: "Date of joinning",
-      dataIndex: "date_joining",
+      dataIndex: "dateOfJoining",
       sorter: true,
       width: "auto",
     },
     {
       title: "Date of Living",
-      dataIndex: "date_living",
+      dataIndex: "dateOfLiving",
       sorter: true,
       width: "auto",
     },
     {
       title: "Contact ",
-      dataIndex: "contact",
+      dataIndex: "contactNumber",
       sorter: true,
       width: "auto",
     },
@@ -79,70 +82,85 @@ function Employees() {
     },
     {
       title: "Ifsc code ",
-      dataIndex: "ifcs_code",
+      dataIndex: "ifscCode",
       sorter: true,
       width: "auto",
     },
     {
       title: "Date of Birth ",
-      dataIndex: "date_of_birth",
+      dataIndex: "dateOfBirth",
       sorter: true,
       width: "auto",
     },
     {
       title: "Aadhar Number ",
-      dataIndex: "aadhar",
+      dataIndex: "aadharNumber",
       sorter: true,
       width: "auto",
     },
     {
       title: "Pan Number ",
-      dataIndex: "pan",
+      dataIndex: "panNumber",
       sorter: true,
       width: "auto",
     },
     {
       title: "Account Number ",
-      dataIndex: "account_no",
+      dataIndex: "accountNumber",
       sorter: true,
       width: "auto",
     },
     {
       title: "Cost to Company ",
-      dataIndex: "cost_company",
+      dataIndex: "costtoCompany",
       sorter: true,
       width: "auto",
     },
     {
       title: "Employee Salary ",
-      dataIndex: "e_salary",
+      dataIndex: "employeeSalary",
       sorter: true,
       width: "auto",
     },
     {
       title: "Bank Name ",
-      dataIndex: "bank_name",
+      dataIndex: "bankName",
       sorter: true,
       width: "auto",
     },
     {
       title: "Company Name ",
-      dataIndex: "company_name",
+      dataIndex: "companyName",
       sorter: true,
       width: "auto",
     },
     {
       title: "Deduction ",
-      dataIndex: "deduction",
+      dataIndex: "diduction",
       sorter: true,
       width: "auto",
     },
     {
-      title: "Image ",
-      dataIndex: "image",
+      title: "Image",
+      dataIndex: "employeeImage",
       sorter: true,
       width: "auto",
+      render: (text, record) => {
+        return (
+          <img
+            src={record.employeeImage}
+            alt="employee"
+            style={{
+              width: "50px",
+              height: "50px",
+              objectFit: "cover",
+              borderRadius: "50%",
+            }}
+          />
+        );
+      },
     },
+
     {
       title: "Address ",
       dataIndex: "address",
@@ -151,158 +169,72 @@ function Employees() {
     },
     {
       title: "Uan no ",
-      dataIndex: "uan",
-      sorter: true,
-      width: "auto",
-    },
-    {
-      title: "Employee id ",
-      dataIndex: "emp_id",
+      dataIndex: "uanNo",
       sorter: true,
       width: "auto",
     },
   ];
 
-  const data = [
-    {
-      id: "1",
-      name: "John Doe",
-      gender: "male",
-      employee_id: "002356",
-      attendance_code: "568de9",
-      employee_status: "On roll",
-      designation: "developer",
-      department: "abc",
-      date_joining: "12/06/2023",
-      date_living: "12/06/2025",
-      contact: "9865894568",
-      email: "info@gmail.com",
-      ifcs_code: "KBR568P",
-      date_of_birth: "15/8/2000",
-      aadhar: "568945986345",
-      pan: "ERT56I",
-      account_no: "598655488065",
-      cost_company: "56000",
-      e_salary: "21000",
-      bank_name: "sbi",
-      company_name: "Pandoza Solutions",
-      deduction: "786",
-      image: "smile",
-      address: "123- Pune, Maharastra",
-      uan: "6556SDD5",
-      emp_id: "12",
-    },
-    {
-      id: "2",
-      name: "John Doe",
-      gender: "male",
-      employee_id: "002356",
-      attendance_code: "568de9",
-      employee_status: "On roll",
-      designation: "developer",
-      department: "abc",
-      date_joining: "12/06/2023",
-      date_living: "12/06/2025",
-      contact: "9865894568",
-      email: "info@gmail.com",
-      ifcs_code: "KBR568P",
-      date_of_birth: "15/8/2000",
-      aadhar: "568945986345",
-      pan: "ERT56I",
-      account_no: "598655488065",
-      cost_company: "56000",
-      e_salary: "21000",
-      bank_name: "sbi",
-      company_name: "Pandoza Solutions",
-      deduction: "786",
-      image: "smile",
-      address: "123- Pune, Maharastra",
-      uan: "6556SDD5",
-      emp_id: "12",
-    },
-    {
-      id: "3",
-      name: "John Doe",
-      gender: "male",
-      employee_id: "002356",
-      attendance_code: "568de9",
-      employee_status: "On roll",
-      designation: "developer",
-      department: "abc",
-      date_joining: "12/06/2023",
-      date_living: "12/06/2025",
-      contact: "9865894568",
-      email: "info@gmail.com",
-      ifcs_code: "KBR568P",
-      date_of_birth: "15/8/2000",
-      aadhar: "568945986345",
-      pan: "ERT56I",
-      account_no: "598655488065",
-      cost_company: "56000",
-      e_salary: "21000",
-      bank_name: "sbi",
-      company_name: "Pandoza Solutions",
-      deduction: "786",
-      image: "smile",
-      address: "123- Pune, Maharastra",
-      uan: "6556SDD5",
-      emp_id: "12",
-    },
-    {
-      id: "4",
-      name: "John Doe",
-      gender: "male",
-      employee_id: "002356",
-      attendance_code: "568de9",
-      employee_status: "On roll",
-      designation: "developer",
-      department: "abc",
-      date_joining: "12/06/2023",
-      date_living: "12/06/2025",
-      contact: "9865894568",
-      email: "info@gmail.com",
-      ifcs_code: "KBR568P",
-      date_of_birth: "15/8/2000",
-      aadhar: "568945986345",
-      pan: "ERT56I",
-      account_no: "598655488065",
-      cost_company: "56000",
-      e_salary: "21000",
-      bank_name: "sbi",
-      company_name: "Pandoza Solutions",
-      deduction: "786",
-      image: "smile",
-      address: "123- Pune, Maharastra",
-      uan: "6556SDD5",
-      emp_id: "12",
-    },
-  ];
+  const token = localStorage.getItem("token");
 
   const getEmployeeData = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}Admin/GetAllEmployee?Page=0&Size=5`
+        `${import.meta.env.VITE_BACKEND_URL}Admin/GetAllEmployee?Page=0&Size=5`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      console.log(response);
+
+      const filterateData = response.data.map((item, index) => ({
+        key: index,
+        id: item.data.uid,
+        employeeName: item.data.employeeName,
+        employeeId: item.data.employeeId,
+        attendanceCode: item.data.attendanceCode,
+        gender: item.data.gender,
+        employeeStatus: item.data.employeeStatus,
+        designation: item.data.designation,
+        department: item.data.department,
+        dateOfJoining: item.data.dateOfJoining,
+        dateOfLiving: item.data.dateOfLiving,
+        contactNumber: item.data.contactNumber,
+        email: item.data.email,
+        ifscCode: item.data.ifscCode,
+        dateOfBirth: item.data.dateOfBirth,
+        aadharNumber: item.data.aadharNumber,
+        panNumber: item.data.panNumber,
+        accountNumber: item.data.accountNumber,
+        costtoCompany: item.data.costtoCompany,
+        employeeSalary: item.data.employeeSalary,
+        bankName: item.data.bankName,
+        companyName: item.data.companyName,
+        diduction: item.data.diduction,
+        employeeImage: item.data.employeeImage,
+        address: item.data.address,
+        uanNo: item.data.uanNo,
+      }));
+      setData(filterateData);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getEmployeeData();
+    if (user) {
+      getEmployeeData();
+    }
   }, []);
 
   return (
     <>
-<div class="employees">
-  <h2>
-    Employees List
-  </h2>
-<TableComponent data={data} columns={columns} />
- 
-</div>
-        
+      <div class="employees">
+        <h2>Employees List</h2>
+        <TableComponent data={data} columns={columns} />
+      </div>
     </>
   );
 }
