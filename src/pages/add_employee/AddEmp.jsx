@@ -54,6 +54,8 @@ const AddEmp = () => {
   const { handleChange, handleSubmit, values, setValues, error, setError } =
     UseForm(formObj, AddEmployeeValidation, addEmployeeData);
 
+    console.log(values, "valuesa")
+
   return (
     <>
       <div class="form_parent">
