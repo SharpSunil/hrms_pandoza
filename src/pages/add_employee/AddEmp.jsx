@@ -2,10 +2,59 @@ import React from "react";
 import "./AddEmp.scss";
 import Input from "../../comp/input/Input";
 import UseForm from "../../UseForm";
+import axios from "axios";
 
 const AddEmp = () => {
-  const { handleChange, handleSubmit, values, setValues, error, setError } =
-    UseForm();
+
+
+const formObj = {
+  employeeName: "",
+  employeeId: "",
+  employeeStatus: "", 
+  designation: "",
+  department: "",
+  dateOfJoining: "",
+  dateOfLiving: "",
+  attendanceCode: "",
+  gender: "",
+  contactNumber: "",
+  email: "",
+  dateOfBirth: "",
+  aadharNumber: "",
+  panNumber: "",
+  accountNumber: "",
+  ifscCode: "",
+  bankName: "",
+  companyName: "",
+  employeeSalary: "",
+  costtoCompany: "",
+  diduction: "",
+  employeeImage: "",
+  address: "",
+  uanNo: "",
+};
+
+
+
+
+  const addEmployeeData = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}Admin/AddEmployee`,
+        values
+      );
+
+      console.log(response,">>>>>>");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { handleChange, handleSubmit, values, setValues, error, setError } = UseForm(
+    formObj,
+    addEmployeeData,
+  );
+
   return (
     <>
       <div class="form_parent">
@@ -67,6 +116,7 @@ const AddEmp = () => {
                   placeholder="Date Of Joining"
                   label="Date Of Joining"
                   name="dateOfJoining"
+                  type="date"
                   value={values.dateOfJoining}
                   onChange={handleChange}
                 />
@@ -78,6 +128,7 @@ const AddEmp = () => {
                   placeholder="Date Of Living"
                   label="Date Of Living"
                   name="dateOfLiving"
+                  type="date"
                   value={values.dateOfLiving}
                   onChange={handleChange}
                 />
@@ -127,6 +178,7 @@ const AddEmp = () => {
                   placeholder="Date Of Birth"
                   label="Date Of Birth"
                   name="dateOfBirth"
+                  type="date"
                   value={values.dateOfBirth}
                   onChange={handleChange}
                 />
@@ -255,7 +307,7 @@ const AddEmp = () => {
             </div>
 
             <div class="form-row">
-              <button class="btn">Submit</button>
+              <button class="btn" type="submit">Submit</button>
             </div>
           </form>
         </div>
