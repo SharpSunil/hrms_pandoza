@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import "./ChangePassword.scss";
 import axios from "axios";
 import UseForm from "../../UseForm";
