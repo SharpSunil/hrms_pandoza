@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./TableComponent.scss";
 import { Table } from "antd";
-
 function TableComponent({ columns, data }) {
   /* ─────────────── helpers ─────────────── */
   const toURLSearchParams = (record) => {
@@ -62,7 +61,7 @@ function TableComponent({ columns, data }) {
   return (
     <>
       <Table
-        scroll={{ x: 4000 }}
+ 
         columns={columns}
         rowKey={(record) => record.id}
         dataSource={data}

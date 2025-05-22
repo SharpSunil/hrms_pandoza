@@ -1,14 +1,9 @@
-.ant-table-wrapper {
-  .ant-spin-nested-loading {
-    .ant-spin-container {
-      .ant-table {
-        .ant-table-container {
-          .ant-table-content {
-            table-layout: auto;
-            background: white;
-            overflow: auto;
-          }
-        }
+.ant-table-wrapper{
+  .ant-spin-nested-loading{
+    .ant-spin-container{
+      .ant-table{
+        table-layout: auto;
+        overflow-x: auto;
       }
     }
   }

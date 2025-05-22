@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Login.scss";
 import Input from "../../comp/input/Input";
 import axios from "axios";
 import UseForm from "../../UseForm";
 import loginValidation from "../../validation/Login";
+import { UserContext } from "../../../Context";
 
 const Login = () => {
+
+  const {getUserData} = useContext(UserContext)
   const formObj = {
     email: "",
     password: "",
@@ -18,11 +21,15 @@ const Login = () => {
         values
       );
       if (response.status === 200) {
-        const { token, uid } = response.data.data;
+        const { token, uid,role } = response.data.data;
         localStorage.setItem("token", token);
         localStorage.setItem("id", uid);
-        // window.location.href = "/";
+        localStorage.setItem("role", role);
+        getUserData(uid,token)
+        window.location.href = "/";
       }
+
+      
     } catch (error) {
       console.log(error);
       if (error.status === 404) {

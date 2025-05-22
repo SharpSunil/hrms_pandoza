@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Table.scss";
 import TableComponent from "../../comp/table/TableComponent";
+import axios from "axios";
 
-function Table() {
+function Employees() {
   const columns = [
     {
       title: "Employee Name",
@@ -277,13 +278,33 @@ function Table() {
     },
   ];
 
+  const getEmployeeData = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}Admin/GetAllEmployee?Page=0&Size=5`
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getEmployeeData();
+  }, []);
+
   return (
     <>
-      <div className="table">
-        <TableComponent data={data} columns={columns} />
-      </div>
+<div class="employees">
+  <h2>
+    Employees List
+  </h2>
+<TableComponent data={data} columns={columns} />
+ 
+</div>
+        
     </>
   );
 }
 
-export default Table;
+export default Employees;
