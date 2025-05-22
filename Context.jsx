@@ -8,31 +8,34 @@ const ContextProvider = ({ children }) => {
 
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
-  // const getUserData = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${import.meta.env.VITE_BACKEND_URL}/Admin/getUserById/${id}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
 
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getUserData = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}user/getUserById/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-  // useEffect(() => {
-  //   if (token) {
-  //     getUserData();
-  //   }
-  // }, [token]);
+      console.log("Content-Type:", response.headers["content-type"]);
+      console.log("Raw Data:", response.data);
+    } catch (error) {
+      console.log("ERROR:", error);
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, getUserData }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 

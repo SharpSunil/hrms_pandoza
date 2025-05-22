@@ -31,7 +31,7 @@ const SendOtp = () => {
       let response;
       if (paraemail) {
         response = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}user/VerifyOtp?Email=${
+          `${import.meta.env.VITE_BACKEND_URL}AuthController/VerifyOtp?Email=${
             values.email
           }&Otp=${values.otp}`
         );
@@ -41,7 +41,7 @@ const SendOtp = () => {
         }
       } else {
         response = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}user/SendOtp?Email=${
+          `${import.meta.env.VITE_BACKEND_URL}AuthController/SendOtp?Email=${
             values.email
           }`
         );
