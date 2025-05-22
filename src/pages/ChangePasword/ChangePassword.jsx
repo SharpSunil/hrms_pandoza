@@ -25,7 +25,7 @@ const ChangePassword = () => {
   const passwordChange = async () => {
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}user/updatePassword`,
+        `${import.meta.env.VITE_BACKEND_URL}AuthController/updatePassword`,
         values
       );
       if (response.status === 200) {
