@@ -24,6 +24,8 @@
         }
 
 
+
+
         form{
             width: 100%;
             display: flex;
@@ -31,6 +33,13 @@
             justify-content: center;
             align-items: center;
             gap: calc(var(--unit) );
+
+
+            .error-class{
+                color: red;
+                font-size: calc(var(--unit) - 5px);
+                margin-top: 5px;
+            }
         }
     }
 }

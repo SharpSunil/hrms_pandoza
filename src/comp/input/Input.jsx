@@ -13,6 +13,7 @@ const Input = ({
   error,
   password,
   disabled,
+  maxLength,
 }) => {
   const [eyeOpen, setEyeOpen] = useState(false);
 
@@ -31,6 +32,7 @@ const Input = ({
             disabled={disabled}
             onChange={onchange}
             type={`${eyeOpen ? "text" : type}`}
+            maxLength={maxLength}
           />
 
           {error && <small className="label_error" >{error}</small>}
