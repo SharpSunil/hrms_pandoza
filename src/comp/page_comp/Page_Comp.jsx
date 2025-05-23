@@ -29,6 +29,10 @@ const Page_Comp = ({ children }) => {
           path_name: "Employees",
           path: "/",
         },
+        {
+          path_name: "Users",
+          path: "/user-list",
+        },
       ],
     },
     {
