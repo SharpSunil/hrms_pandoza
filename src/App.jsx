@@ -9,15 +9,15 @@ import UserRegistration from "./pages/user-registration/UserRegistration";
 import PrivateRoute from "./routes/PrivateRoute";
 import AddEmp from "../src/pages/add_employee/AddEmp";
 import { UserContext } from "../Context";
-import Employees from "./pages/table/Employees"
+import Employees from "./pages/table/Employees";
 import EmployeeRoute from "./routes/EmployeeRoute";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
+import UserList from "./pages/user-list/UserList";
 
 function App() {
   const { user, loading } = useContext(UserContext);
 
   const Employeepages = [
-   
     {
       component: ChangePassword,
       path: "/change-password",
@@ -26,7 +26,7 @@ function App() {
   ];
 
   const AdminPages = [
-     {
+    {
       component: AddEmp,
       path: "/add_employee",
       replace: true,
@@ -45,11 +45,15 @@ function App() {
       component: UserRegistration,
       path: "/user-registration",
       replace: true,
-    }
-  ]
+    },
+    {
+      component: UserList,
+      path: "/user-list",
+      replace: true,
+    },
+  ];
 
   if (loading) {
-    
     return <div>Loading...</div>;
   }
 
@@ -88,7 +92,6 @@ function App() {
       </BrowserRouter>
       <ToastContainer />
     </>
-    
   );
 }
 
