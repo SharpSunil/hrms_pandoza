@@ -3,8 +3,12 @@ import "./Page_Comp.scss";
 import { Link, useLocation } from "react-router-dom";
 import { RiDashboardFill } from "react-icons/ri";
 import { RiDashboardHorizontalLine } from "react-icons/ri";
+import { BsListUl } from "react-icons/bs";
+import { BsListTask } from "react-icons/bs";
+import { MdOutlineAddCircleOutline } from "react-icons/md";
+import { MdOutlineAddCircle } from "react-icons/md";
 const Page_Comp = ({ children }) => {
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
 
   const location = useLocation();
   const sideBarSection = [
@@ -15,8 +19,8 @@ const Page_Comp = ({ children }) => {
       path: "/",
     },
     {
-      icon: <RiDashboardFill />,
-      line_icon: <RiDashboardHorizontalLine />,
+      icon: <BsListTask />,
+      line_icon: <BsListUl />,
       path_name: "Listings",
       
       children: [
@@ -27,8 +31,8 @@ const Page_Comp = ({ children }) => {
       ],
     },
     {
-      icon: <RiDashboardFill />,
-      line_icon: <RiDashboardHorizontalLine />,
+      icon: <MdOutlineAddCircle />,
+      line_icon: <MdOutlineAddCircleOutline />,
       path_name: "Add",
     
       children: [
@@ -51,7 +55,7 @@ const Page_Comp = ({ children }) => {
         <div
           class={active ? "sidebar active" : "sidebar"}
           onMouseEnter={() => setActive(true)}
-          // onMouseLeave={() => setActive(false)}
+          onMouseLeave={() => setActive(false)}
         >
           <div class="logo"></div>
           <div class="nav_section">
