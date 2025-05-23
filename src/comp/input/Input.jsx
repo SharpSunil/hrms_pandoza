@@ -18,8 +18,6 @@ const Input = ({
 
   const inputType = password ? (eyeOpen ? "text" : "password") : type;
 
-  
-
   return (
     <div className="input">
       <label htmlFor={name}>{label}</label>

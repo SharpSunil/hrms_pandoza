@@ -1,0 +1,24 @@
+.user-registration {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .user-registration-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--unit));
+    width: 600px;
+
+    .wrapper-user-regi {
+      width: 100%;
+      padding: 20px;
+      background-color: var(--white);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      gap: calc(var(--unit));
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

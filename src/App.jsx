@@ -5,11 +5,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SendOtp from "./pages/SendOtp/SendOtp";
 import Login from "./pages/Login/Login";
 import ChangePassword from "./pages/ChangePasword/ChangePassword";
+import UserRegistration from "./pages/user-registration/UserRegistration";
 import PrivateRoute from "./routes/PrivateRoute";
 import AddEmp from "../src/pages/add_employee/AddEmp";
 import { UserContext } from "../Context";
 import Employees from "./pages/table/Employees"
 import EmployeeRoute from "./routes/EmployeeRoute";
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   const { user, loading } = useContext(UserContext);
@@ -39,6 +41,11 @@ function App() {
       path: "/change-password",
       replace: true,
     },
+    {
+      component: UserRegistration,
+      path: "/user-registration",
+      replace: true,
+    }
   ]
 
   if (loading) {
@@ -79,7 +86,9 @@ function App() {
           )}
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </>
+    
   );
 }
 

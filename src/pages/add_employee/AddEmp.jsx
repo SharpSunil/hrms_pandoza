@@ -33,14 +33,14 @@ const AddEmp = () => {
     uanNo: "",
   };
 
-
   const token = localStorage.getItem("token");
 
   const addEmployeeData = async () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}Admin/AddEmployee`,
-        values,{
+        values,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -53,8 +53,6 @@ const AddEmp = () => {
 
   const { handleChange, handleSubmit, values, setValues, error, setError } =
     UseForm(formObj, AddEmployeeValidation, addEmployeeData);
-
-    console.log(values, "valuesa")
 
   return (
     <>
