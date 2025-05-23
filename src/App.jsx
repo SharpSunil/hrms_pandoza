@@ -31,7 +31,7 @@ function App() {
     },
     {
       component: Employees,
-      path: "/Employees",
+      path: "/",
       replace: true,
     },
     {

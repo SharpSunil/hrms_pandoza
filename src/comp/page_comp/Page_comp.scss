@@ -21,6 +21,11 @@
     gap: var(--unit);
     background-color: var(--accent);
     overflow: hidden;
+    transition: var(--trans);
+
+    &.active {
+      width: 250px;
+    }
 
     .logo {
       width: 100%;
@@ -30,23 +35,72 @@
     .nav_section {
       width: 100%;
       height: calc(100% - 20%);
-
-      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: calc(var(--unit) + 8px);
 
       .nav {
-       background-color: white;
-          color: var(--accent);
+        color: var(--white);
         width: 100%;
         // transform: translateX(20px);
-        padding: 10px 0px 10px 10px;
+        padding: 10px;
         display: flex;
         border-radius: 25px 0px 0px 25px;
         position: relative;
         justify-content: flex-start;
         align-items: center;
         // color: white;
-        gap: calc(var(--unit) / 2);
+        gap: calc(var(--unit));
         font-size: calc(var(--unit));
+
+        &.active {
+          background-color: white;
+          color: var(--accent);
+
+          span {
+            &.fill_icon {
+              display: flex;
+            }
+
+            &.line_icon {
+              display: none;
+            }
+          }
+
+          &::after {
+            display: flex;
+          }
+
+          &::before {
+            display: flex;
+          }
+        }
+
+        &:hover {
+          background-color: white;
+          color: var(--accent);
+
+          span {
+            &.fill_icon {
+              display: flex;
+            }
+
+            &.line_icon {
+              display: none;
+            }
+          }
+
+          &::after {
+            display: flex;
+            // right: 2px;
+          }
+
+          &::before {
+            display: flex;
+          }
+        }
 
         span {
           display: flex;
@@ -68,73 +122,33 @@
           }
         }
 
-        &.active {
-          background-color: white;
-          color: var(--accent);
-
-          &::after {
-            display: block;
-          }
-
-          &::before {
-            display: block;
-          }
-
-          .fill_icon {
-            display: flex;
-          }
-
-          .line_icon {
-            display: none;
-            color: var(--accent);
-          }
-        }
-        &:hover {
-          background-color: white;
-          color: var(--accent);
-
-          &::after {
-            display: block;
-          }
-
-          &::before {
-            display: block;
-          }
-
-          .fill_icon {
-            display: flex;
-          }
-
-          .line_icon {
-            display: none;
-            color: var(--accent);
-          }
-        }
-
         &::after {
           content: "";
           position: absolute;
-          height: 40px;
+          height: 15px;
           display: none;
           aspect-ratio: 1;
           background-color: var(--accent);
-          right: 0.5px;
-          top: -87%;
+          // background-color: red;
+          right: -0.7px;
+          top: -33%;
           border-radius: 0px 0px 18px 0px;
-          box-shadow: 0px 22px 0px white;
+          box-shadow: 4px 6px 0px white;
         }
 
         &::before {
           content: "";
           position: absolute;
-          bottom: -89%;
-          right: 0;
+          bottom: -33%;
+          right: -1px;
           display: none;
-          width: 40px;
+          width: 15px;
           aspect-ratio: 1;
           background-color: var(--accent);
+          // background-color: red;
+
           border-radius: 0px 18px 0px 0px;
-          box-shadow: 22px 0px 0px white;
+          box-shadow: 5px -6px 0px white;
         }
       }
     }
@@ -146,14 +160,19 @@
   }
 
   .section {
-    width: calc(100% - 250px);
+    width: calc(100% - 50px);
     height: auto;
-    margin-left: 250px;
+    margin-left: 50px;
     // overflow-y: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    transition: var(--trans);
     padding: 10px 10px;
+
+    &.active {
+      width: calc(100% - 250px);
+      margin-left: 250px;
+    }
   }
 }
