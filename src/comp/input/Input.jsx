@@ -12,6 +12,7 @@ const Input = ({
   error,
   password,
   disabled,
+  extra_label,
   maxLength,
 }) => {
   const [eyeOpen, setEyeOpen] = useState(false);
@@ -23,7 +24,7 @@ const Input = ({
       <label htmlFor={name}>{label}</label>
       <div className="wraper">
         <input
-          className={error ? "error" : ""}
+          className={(error ? "error" : "") + (extra_label ? " extralabel" : "")}
           name={name}
           placeholder={placeholder}
           disabled={disabled}
@@ -32,6 +33,7 @@ const Input = ({
           maxLength={maxLength}
           {...(type !== "file" && { value: value || "" })}
         />
+        {extra_label && <span className="extra_label"> {extra_label} </span>}
         {error && <small className="label_error">{error}</small>}
         {password && (
           <span className="eye-icon" onClick={() => setEyeOpen(!eyeOpen)}>
