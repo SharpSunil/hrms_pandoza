@@ -218,7 +218,8 @@ navigate(`/add_employee?employeeId=${id}`)
 
       const filterateData = response.data.map((item, index) => ({
         key: index,
-        id: item.data.uid,
+        id: item.data.eid,
+     
         employeeName: item.data.employeeName,
         employeeId: item.data.employeeId,
         attendanceCode: item.data.attendanceCode,

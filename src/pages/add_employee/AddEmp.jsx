@@ -44,11 +44,80 @@ const AddEmp = () => {
   const addEmployeeData = async () => {
     try {
       let response;
+      let formData = new FormData();
+
+
+      const data = {
+        uid: values.uid,
+        eid: values.eid,
+        employeeName: values.employeeName,
+        employeeId: values.employeeId,
+        employeeStatus: values.employeeStatus,
+        designation: values.designation,
+        department: values.department,
+        dateOfJoining: values.dateOfJoining,
+        dateOfLiving: values.dateOfLiving,
+        attendanceCode: values.attendanceCode,
+        gender: values.gender,
+        contactNumber: values.contactNumber,
+        email: values.email,
+        dateOfBirth: values.dateOfBirth,
+        aadharNumber: values.aadharNumber,
+        panNumber: values.panNumber,
+        accountNumber: values.accountNumber,
+        ifscCode: values.ifscCode,
+        bankName: values.bankName,
+        companyName: values.companyName,
+        employeeSalary: values.employeeSalary,
+        costtoCompany: values.costtoCompany,
+        diduction: values.diduction,
+        address: values.address,
+        uanNo: values.uanNo,
+      };
+      const newdata = {
+        uid: values.uid,
+        eid: values.eid,
+        employeeName: values.employeeName,
+        employeeId: `PSPL${values.employeeId}`,
+        employeeStatus: values.employeeStatus,
+        designation: values.designation,
+        department: values.department,
+        dateOfJoining: values.dateOfJoining,
+        dateOfLiving: values.dateOfLiving,
+        attendanceCode: values.attendanceCode,
+        gender: values.gender,
+        contactNumber: values.contactNumber,
+        email: values.email,
+        dateOfBirth: values.dateOfBirth,
+        aadharNumber: values.aadharNumber,
+        panNumber: values.panNumber,
+        accountNumber: values.accountNumber,
+        ifscCode: values.ifscCode,
+        bankName: values.bankName,
+        companyName: values.companyName,
+        employeeSalary: values.employeeSalary,
+        costtoCompany: values.costtoCompany,
+        diduction: values.diduction,
+        address: values.address,
+        uanNo: values.uanNo,
+      };
+
+      if (employeeId) {
+        formData.append("data", JSON.stringify(data));
+      } else {
+        formData.append("data", JSON.stringify(newdata));
+      }
+
+      formData.append("data", JSON.stringify(data));
+
+      if (values.employeeImage) {
+        formData.append("image", values.employeeImage);
+      }
 
       if (employeeId) {
         response = await axios.put(
           `${import.meta.env.VITE_BACKEND_URL}Admin/UpdateEmployee`,
-          values,
+          formData,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -58,7 +127,7 @@ const AddEmp = () => {
       } else {
         response = await axios.post(
           `${import.meta.env.VITE_BACKEND_URL}Admin/AddEmployee`,
-          values,
+          formData,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -90,8 +159,10 @@ const AddEmp = () => {
 
       const data = response.data.data;
 
-      setValues({
+      setValues((prev) => ({
+        ...prev,
         uid: data.uid,
+        eid: data.eid,
         employeeName: data.employeeName,
         employeeId: data.employeeId,
         employeeStatus: data.employeeStatus,
@@ -116,7 +187,7 @@ const AddEmp = () => {
 
         address: data.address,
         uanNo: data.uanNo || "Not Added",
-      });
+      }));
     } catch (error) {
       console.log(error);
     }
@@ -156,6 +227,7 @@ const AddEmp = () => {
                 />
               </div>
               <div class="half-row">
+              
                 <Input
                   placeholder="Employee Id"
                   label="Employee Id"
@@ -163,6 +235,7 @@ const AddEmp = () => {
                   value={values.employeeId}
                   onchange={handleChange}
                   error={error.employeeId}
+                  extra_label="PSPL"
                 />
               </div>
             </div>
