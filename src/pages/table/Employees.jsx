@@ -4,10 +4,19 @@ import TableComponent from "../../comp/table/TableComponent";
 import axios from "axios";
 import { UserContext } from "../../../Context";
 import Header from "../../comp/header/Header";
-
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "antd";
 function Employees() {
   const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
+  const navigate = useNavigate()
+
+  const navigateToaddemp = (id)=>{
+navigate(`/add_employee?employeeId=${id}`)
+  }
+
   const columns = [
     {
       title: "Employee Name",
@@ -163,16 +172,34 @@ function Employees() {
     },
 
     {
-      title: "Address ",
+      title: "Address",
       dataIndex: "address",
       sorter: true,
       width: "auto",
     },
     {
-      title: "Uan no ",
+      title: "Uan no",
       dataIndex: "uanNo",
       sorter: true,
       width: "auto",
+    },
+    {
+      title: "Actions",
+      
+      sorter: true,
+      width: "auto",
+       render: (text, record) => {
+        return (
+        <div class="actions" style={{ display: "flex", gap: "10px" }}>
+          <Button class="edit-btn" onClick={()=>navigateToaddemp(record.employeeId)}  >
+           <MdEdit />
+          </Button>
+          <Button class="delete-btn">
+           <MdDelete />
+          </Button>
+        </div>
+        );
+      },
     },
   ];
 

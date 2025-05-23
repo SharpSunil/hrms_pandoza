@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./AddEmp.scss";
 import Input from "../../comp/input/Input";
 import UseForm from "../../UseForm";
 import AddEmployeeValidation from "../../validation/AddEmployee";
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 
 const AddEmp = () => {
+  const [searchparams] = useSearchParams();
+
+
   const formObj = {
     employeeName: "",
     employeeId: "",
@@ -53,6 +57,39 @@ const AddEmp = () => {
 
   const { handleChange, handleSubmit, values, setValues, error, setError } =
     UseForm(formObj, AddEmployeeValidation, addEmployeeData);
+
+  // get employeeDetails
+  const getEmployeeDetails = async (employeeId) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}Admin/GetEmployee/${employeeId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response.data.data);
+      const data = response.data.data;
+
+      setValues({
+        
+      })
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(()=>{
+  const employeeId = searchparams.get("employeeId");
+
+  if(employeeId){
+    getEmployeeDetails(employeeId)
+  }
+  },[])
 
   return (
     <>
