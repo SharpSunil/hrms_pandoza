@@ -10,8 +10,8 @@ const Login = () => {
 
   const {getUserData} = useContext(UserContext)
   const formObj = {
-    email: "",
-    password: "",
+    email: "harsh@pandozasolutions.com",
+    password: "Harsh@123",
   };
 
   const loginForm = async () => {
