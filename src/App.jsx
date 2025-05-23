@@ -11,7 +11,7 @@ import AddEmp from "../src/pages/add_employee/AddEmp";
 import { UserContext } from "../Context";
 import Employees from "./pages/table/Employees";
 import EmployeeRoute from "./routes/EmployeeRoute";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import UserList from "./pages/user-list/UserList";
 
 function App() {
