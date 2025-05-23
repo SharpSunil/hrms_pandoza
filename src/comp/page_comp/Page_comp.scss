@@ -209,7 +209,7 @@
       }
     }
 
-    .logout {
+    .version {
       width: 100%;
       height: calc(100% - 80% - 10%);
     }
@@ -225,6 +225,7 @@
     align-items: center;
     transition: var(--trans);
     padding: 10px 10px;
+    margin-top: 50px;
 
     &.active {
       width: calc(100% - 250px);

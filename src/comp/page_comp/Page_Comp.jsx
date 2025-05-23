@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./Page_Comp.scss";
 import { Link, useLocation } from "react-router-dom";
 import { RiDashboardFill } from "react-icons/ri";
@@ -7,8 +7,9 @@ import { BsListUl } from "react-icons/bs";
 import { BsListTask } from "react-icons/bs";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { MdOutlineAddCircle } from "react-icons/md";
+import { UserContext } from "../../../Context";
 const Page_Comp = ({ children }) => {
-  const [active, setActive] = useState(false);
+ const {active,setActive} = useContext(UserContext)
 
   const location = useLocation();
   const sideBarSection = [
@@ -85,7 +86,7 @@ const Page_Comp = ({ children }) => {
               </Link>
             ))}
           </div>
-          <div class="logout"></div>
+          <div class="version"></div>
         </div>
         <div class={active ? "section active" : "section"}>{children}</div>
       </div>

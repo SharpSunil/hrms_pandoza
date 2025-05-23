@@ -6,7 +6,7 @@ export const UserContext = createContext();
 const ContextProvider = ({ children }) => {
 const [user, setUser] = useState();
 const [loading, setLoading] = useState(true);
-
+  const [active, setActive] = useState(false);
   const role = localStorage.getItem("role");
 
   const getUserData = async (id, token) => {
@@ -59,7 +59,7 @@ useEffect(() => {
 }, []);
 
   return (
-    <UserContext.Provider value={{ user,loading, getUserData }}>
+    <UserContext.Provider value={{ user,loading, getUserData,active,setActive }}>
       {children}
     </UserContext.Provider>
   );

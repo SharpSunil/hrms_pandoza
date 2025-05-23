@@ -3,6 +3,7 @@ import "./Table.scss";
 import TableComponent from "../../comp/table/TableComponent";
 import axios from "axios";
 import { UserContext } from "../../../Context";
+import Header from "../../comp/header/Header";
 
 function Employees() {
   const { user } = useContext(UserContext);
@@ -231,8 +232,9 @@ function Employees() {
 
   return (
     <>
+    <Header title="Employees List" />
       <div class="employees">
-        <h2>Employees List</h2>
+  
         <TableComponent data={data} columns={columns} />
       </div>
     </>

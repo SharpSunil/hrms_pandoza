@@ -1,0 +1,18 @@
+.header{
+    width: calc(100% - 50px);
+    background-color: var(--bg-color);
+    height: 40px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 5px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--trans);
+
+    &.active{
+        width: calc(100% - 250px);
+        margin-left: 250px;
+    }
+}
