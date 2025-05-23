@@ -24,20 +24,7 @@ const UserList = () => {
 
   const token = localStorage.getItem("token");
 
-  const getUserById = async (id) => {
-    try {
-      const resposne = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}Admin/getUserById/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ 
 
   const getUserData = async () => {
     try {

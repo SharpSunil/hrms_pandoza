@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./UserRegistration.scss";
 import Input from "../../comp/input/Input";
 import InputDropdown from "../../comp/dropdown/Dropdown";
@@ -6,8 +6,11 @@ import UserRegistrationValidation from "../../validation/UserRegistration";
 import UseForm from "../../UseForm";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
 
 function UserRegistration() {
+  const [searchparams] = useSearchParams();
+
   const formObj = {
     email: "",
     password: "",
@@ -27,25 +30,43 @@ function UserRegistration() {
 
   const token = localStorage.getItem("token");
 
+  const userId = searchparams.get("userId");
+
   const handleUserRegistration = async () => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}Admin/RegisterUser`,
-        values,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      let response;
 
-      setValues({
-        email: "",
-        password: "",
-        role: "",
-      });
+      if (userId) {
+        response = await axios.put(
+          `${import.meta.env.VITE_BACKEND_URL}Admin/UpdateUser/${userId}`,
+          values,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } else {
+        response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}Admin/RegisterUser`,
+          values,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      toast.success("User registered successfully!");
+        console.log(response, "update update");
+
+        setValues({
+          email: "",
+          password: "",
+          role: "",
+        });
+
+        toast.success("User registered successfully!");
+      }
     } catch (error) {
       console.log(error);
       const responseMsg = error?.response?.data?.responseMessage;
@@ -57,6 +78,35 @@ function UserRegistration() {
       }
     }
   };
+
+  // get  user by id
+  const getUserById = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}Admin/getUserById/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = response.data.data;
+      setValues({
+        email: data.email,
+        password: data.password,
+        role: data.role,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (userId) {
+      getUserById();
+    }
+  }, []);
 
   const { handleChange, handleSubmit, values, error, setValues } = UseForm(
     formObj,
