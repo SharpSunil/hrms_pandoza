@@ -20,6 +20,7 @@
     align-items: center;
     gap: var(--unit);
     background-color: var(--accent);
+    overflow: hidden;
 
     .logo {
       width: 100%;
