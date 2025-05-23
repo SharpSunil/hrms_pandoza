@@ -84,9 +84,9 @@ const AddEmployeeValidation = (value) => {
   if (!value.diduction) {
     errors.diduction = "Diduction field is required";
   }
-  if (!value.employeeImage) {
-    errors.employeeImage = "Image is required";
-  }
+  // if (!value.employeeImage) {
+  //   errors.employeeImage = "Image is required";
+  // }
   if (!value.uanNo) {
     errors.uanNo = "UAN number is required";
   }

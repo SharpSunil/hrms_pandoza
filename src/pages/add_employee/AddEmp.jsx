@@ -9,8 +9,8 @@ import { useSearchParams } from "react-router-dom";
 const AddEmp = () => {
   const [searchparams] = useSearchParams();
 
-
   const formObj = {
+    uid: "",
     employeeName: "",
     employeeId: "",
     employeeStatus: "",
@@ -37,19 +37,37 @@ const AddEmp = () => {
     uanNo: "",
   };
 
+  const employeeId = searchparams.get("employeeId");
+
   const token = localStorage.getItem("token");
 
   const addEmployeeData = async () => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}Admin/AddEmployee`,
-        values,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      let response;
+
+      if (employeeId) {
+        response = await axios.put(
+          `${import.meta.env.VITE_BACKEND_URL}Admin/UpdateEmployee`,
+          values,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } else {
+        response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}Admin/AddEmployee`,
+          values,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      }
+
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +77,7 @@ const AddEmp = () => {
     UseForm(formObj, AddEmployeeValidation, addEmployeeData);
 
   // get employeeDetails
-  const getEmployeeDetails = async (employeeId) => {
+  const getEmployeeDetails = async () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}Admin/GetEmployee/${employeeId}`,
@@ -70,26 +88,45 @@ const AddEmp = () => {
         }
       );
 
-      console.log(response.data.data);
       const data = response.data.data;
 
       setValues({
-        
-      })
+        uid: data.uid,
+        employeeName: data.employeeName,
+        employeeId: data.employeeId,
+        employeeStatus: data.employeeStatus,
+        designation: data.designation,
+        department: data.department,
+        dateOfJoining: data.dateOfJoining,
+        dateOfLiving: data.dateOfLiving,
+        attendanceCode: data.attendanceCode,
+        gender: data.gender,
+        contactNumber: data.contactNumber,
+        email: data.email,
+        dateOfBirth: data.dateOfBirth,
+        aadharNumber: data.aadharNumber,
+        panNumber: data.panNumber,
+        accountNumber: data.accountNumber,
+        ifscCode: data.ifscCode,
+        bankName: data.bankName,
+        companyName: data.companyName,
+        employeeSalary: data.employeeSalary,
+        costtoCompany: data.costtoCompany,
+        diduction: data.diduction,
 
-
+        address: data.address,
+        uanNo: data.uanNo || "Not Added",
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(()=>{
-  const employeeId = searchparams.get("employeeId");
-
-  if(employeeId){
-    getEmployeeDetails(employeeId)
-  }
-  },[])
+  useEffect(() => {
+    if (employeeId) {
+      getEmployeeDetails();
+    }
+  }, []);
 
   return (
     <>
@@ -98,6 +135,16 @@ const AddEmp = () => {
           <h2>Add Employee Details</h2>
           <form action="" onSubmit={handleSubmit}>
             <div class="form-row">
+              <div class="half-row">
+                <Input
+                  placeholder="User"
+                  label="User"
+                  name="uid"
+                  value={values.uid}
+                  onchange={handleChange}
+                  error={error.uid}
+                />
+              </div>
               <div class="half-row">
                 <Input
                   placeholder="Employee Name"
