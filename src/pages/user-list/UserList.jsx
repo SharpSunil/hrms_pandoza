@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./UserList.scss";
+import { UserContext } from "../../../Context";
 import TableComponent from "../../comp/table/TableComponent";
 import {
   AiTwotoneDelete,
@@ -7,62 +8,72 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
+import axios from "axios";
+import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
-  const [visiblePasswords, setVisiblePasswords] = useState({});
+  const { user } = useContext(UserContext);
 
-  const togglePasswordVisibility = (key) => {
-    setVisiblePasswords((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
+
+  const navigateUserlist = (id) => {
+    navigate(`/user-registration?userId=${id}`);
   };
 
+  const token = localStorage.getItem("token");
+
+  const getUserById = async (id) => {
+    try {
+      const resposne = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}Admin/getUserById/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getUserData = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}Admin/GetAllUser?Page=0&Size=5`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const filterateData = response.data.map((item, index) => ({
+        key: index,
+        id: item.data.uid,
+        useremail: item.data?.email,
+        userrole: item.data?.role,
+      }));
+      setData(filterateData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (user || user.role === "ADMIN") {
+      getUserData();
+    }
+  }, []);
+
   const columns = [
-    {
-      title: "User Name",
-      dataIndex: "userName",
-      sorter: true,
-      width: "auto",
-    },
     {
       title: "User Email",
       dataIndex: "useremail",
       sorter: true,
       width: "auto",
-    },
-    {
-      title: "User Password",
-      dataIndex: "userpassword",
-      sorter: true,
-      width: "auto",
-      render: (text, record) => (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "10px",
-          }}
-        >
-          <span>{visiblePasswords[record.key] ? text : "********"}</span>
-          <button
-            onClick={() => togglePasswordVisibility(record.key)}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-            }}
-          >
-            {visiblePasswords[record.key] ? (
-              <AiOutlineEyeInvisible />
-            ) : (
-              <AiOutlineEye />
-            )}
-          </button>
-        </div>
-      ),
     },
     {
       title: "User Role",
@@ -75,8 +86,9 @@ const UserList = () => {
       dataIndex: "action",
       render: (text, record) => (
         <div style={{ display: "flex", gap: "10px" }}>
-          <button
+          <Button
             className="edit-btn"
+            onClick={() => navigateUserlist(record.id)}
             style={{
               padding: "5px",
               cursor: "pointer",
@@ -86,8 +98,8 @@ const UserList = () => {
             }}
           >
             <CiEdit />
-          </button>
-          <button
+          </Button>
+          <Button
             className="delete-btn"
             style={{
               padding: "5px",
@@ -98,54 +110,9 @@ const UserList = () => {
             }}
           >
             <AiTwotoneDelete />
-          </button>
+          </Button>
         </div>
       ),
-    },
-  ];
-
-  const data = [
-    {
-      key: "1",
-      userName: "John Doe",
-      useremail: "johndoe@gmail.com",
-      userpassword: "password123",
-      userrole: "Admin",
-    },
-    {
-      key: "2",
-      userName: "John Doe",
-      useremail: "johndoe@gmail.com",
-      userpassword: "password123",
-      userrole: "Admin",
-    },
-    {
-      key: "3",
-      userName: "John Doe",
-      useremail: "johndoe@gmail.com",
-      userpassword: "password123",
-      userrole: "Admin",
-    },
-    {
-      key: "4",
-      userName: "John Doe",
-      useremail: "johndoe@gmail.com",
-      userpassword: "password123",
-      userrole: "Admin",
-    },
-    {
-      key: "5",
-      userName: "John Doe",
-      useremail: "johndoe@gmail.com",
-      userpassword: "password123",
-      userrole: "Admin",
-    },
-    {
-      key: "6",
-      userName: "John Doe",
-      useremail: "johndoe@gmail.com",
-      userpassword: "password123",
-      userrole: "Admin",
     },
   ];
 
