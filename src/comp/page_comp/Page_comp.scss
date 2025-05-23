@@ -22,9 +22,15 @@
     background-color: var(--accent);
     overflow: hidden;
     transition: var(--trans);
+    z-index: 99;
 
     &.active {
       width: 250px;
+
+      .nav_section {
+        .nav {
+        }
+      }
     }
 
     .logo {
@@ -54,6 +60,51 @@
         // color: white;
         gap: calc(var(--unit));
         font-size: calc(var(--unit));
+
+
+        .drop_down {
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100%;
+          z-index: 99;
+          display: none;
+          padding: calc(var(--unit) / 2);
+          .list {
+            background-color: white;
+            border-radius: 10px;
+            color: var(--accent);
+
+            width: calc(100% - 10px);
+             display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            overflow: hidden;
+
+            .dropnav {
+              padding: 10px 10px;
+              width: 100%;
+              border-bottom: 1px solid rgb(221, 221, 221);
+              text-align: left;
+
+              &.active{
+               
+                background-color: rgb(221, 221, 221);
+                color: var(--accent);
+         
+              
+              }
+
+              &:hover{
+                background-color: rgb(221, 221, 221);
+                color: var(--accent);
+         
+              }
+            }
+          }
+        }
 
         &.active {
           background-color: white;
@@ -98,6 +149,10 @@
           }
 
           &::before {
+            display: flex;
+          }
+
+          .drop_down {
             display: flex;
           }
         }
