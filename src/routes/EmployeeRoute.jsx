@@ -6,8 +6,6 @@ const EmployeeRoute = ({children}) => {
   const role = localStorage.getItem("role")
 
 
-console.log(user)
-console.log(role)
 
   if (loading) return <div>Loading...</div>;
 
