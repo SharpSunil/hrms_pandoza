@@ -1,20 +1,19 @@
-import React from 'react'
+import React from "react";
+import Header from "../../comp/header/Header";
 
 const AdminDashboard = () => {
   return (
     <>
-        <div className="parent">
-            <div className="cont">
-            <div className="admin_dash">
-                <h1>Admin Dashboard</h1>
-                <p>Welcome to the admin dashboard!</p>
-                <p>Here you can manage users, view reports, and configure settings.</p>
-            </div>
-            </div>
+      <Header title="Admin Dashboard" />
+      <div className="parent admindash">
+        <div className="cont">
+          <div className="cards-wrap">
+            
+          </div>
         </div>
-      
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default AdminDashboard
+export default AdminDashboard;
