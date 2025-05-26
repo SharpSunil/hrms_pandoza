@@ -18,7 +18,7 @@ import AdminDashboard from "./pages/admin_dash/AdminDashboard";
 
 function App() {
   const { user, loading } = useContext(UserContext);
-
+console.log(user?.role)
   const Employeepages = [
     {
       component: ChangePassword,
@@ -77,14 +77,14 @@ function App() {
           {user ? (
             <>
               <Route path="/login" element={<Login />} replace />
-              {AdminPages.map((item, index) => (
+              {user?.role === "ADMIN" && AdminPages.map((item, index) => (
                 <Route
                   key={index}
                   path={item.path}
                   element={<PrivateRoute>{<item.component />}</PrivateRoute>}
                 />
               ))}
-              {Employeepages.map((item, index) => (
+              {user?.role === "EMPLOYEE" && Employeepages.map((item, index) => (
                 <Route
                   key={index}
                   path={item.path}

@@ -2,11 +2,12 @@ import React, { useContext } from 'react'
 import { UserContext } from '../../Context';
 
 const EmployeeRoute = ({children}) => {
-const {user,loading} = useContext(UserContext);
+  const {user,loading} = useContext(UserContext);
   const role = localStorage.getItem("role")
 
 
-
+console.log(user)
+console.log(role)
 
   if (loading) return <div>Loading...</div>;
 
