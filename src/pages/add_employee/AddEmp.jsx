@@ -142,7 +142,7 @@ const AddEmp = () => {
     }
   };
 
-  const { handleChange, handleSubmit, values, setValues, error, setError } =
+  const { handleChange, handleSubmit, values, setValues, error } =
     UseForm(formObj, AddEmployeeValidation, addEmployeeData);
 
   // get employeeDetails
