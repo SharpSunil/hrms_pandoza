@@ -14,6 +14,7 @@ import EmployeeRoute from "./routes/EmployeeRoute";
 import { ToastContainer } from "react-toastify";
 import UserList from "./pages/user-list/UserList";
 import EmployeeDashboard from "./pages/emp_dash/EmployeeDashboard";
+import AdminDashboard from "./pages/admin_dash/AdminDashboard";
 
 function App() {
   const { user, loading } = useContext(UserContext);
@@ -27,14 +28,17 @@ function App() {
 
     {
       component: EmployeeDashboard,
-      path: "/emp-dashboard",
+      path: "/",
       replace: true,
     },
-
   ];
 
-
   const AdminPages = [
+    {
+      component: AdminDashboard,
+      path: "/",
+      replace: true,
+    },
     {
       component: AddEmp,
       path: "/add_employee",
@@ -42,7 +46,7 @@ function App() {
     },
     {
       component: Employees,
-      path: "/",
+      path: "/employees",
       replace: true,
     },
     {
