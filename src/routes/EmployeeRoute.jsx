@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../Context';
+import Page_Comp from '../comp/page_comp/Page_Comp';
+import { Navigate } from 'react-router-dom';
 
 const EmployeeRoute = ({children}) => {
   const {user,loading} = useContext(UserContext);
