@@ -13,6 +13,7 @@ import Employees from "./pages/table/Employees";
 import EmployeeRoute from "./routes/EmployeeRoute";
 import { ToastContainer } from "react-toastify";
 import UserList from "./pages/user-list/UserList";
+import EmployeeDashboard from "./pages/emp_dash/EmployeeDashboard";
 
 function App() {
   const { user, loading } = useContext(UserContext);
@@ -23,7 +24,15 @@ function App() {
       path: "/change-password",
       replace: true,
     },
+
+    {
+      component: EmployeeDashboard,
+      path: "/emp-dashboard",
+      replace: true,
+    },
+
   ];
+
 
   const AdminPages = [
     {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./UserRegistration.scss";
 import Input from "../../comp/input/Input";
 import InputDropdown from "../../comp/dropdown/Dropdown";
@@ -11,13 +11,7 @@ import { useSearchParams } from "react-router-dom";
 function UserRegistration() {
   const [searchparams] = useSearchParams();
 
-  const formObj = {
-    email: "",
-    password: "",
-    role: "",
-  };
-
-  const option = [
+  const roleOption = [
     {
       value: "ADMIN",
       label: "Admin",
@@ -27,6 +21,12 @@ function UserRegistration() {
       label: "Employee",
     },
   ];
+
+  const formObj = {
+    email: "",
+    password: "",
+    role: "",
+  };
 
   const token = localStorage.getItem("token");
 
@@ -46,6 +46,8 @@ function UserRegistration() {
             },
           }
         );
+
+        toast.success("User update successfully!");
       } else {
         response = await axios.post(
           `${import.meta.env.VITE_BACKEND_URL}Admin/RegisterUser`,
@@ -56,8 +58,6 @@ function UserRegistration() {
             },
           }
         );
-
-        console.log(response, "update update");
 
         setValues({
           email: "",
@@ -90,6 +90,8 @@ function UserRegistration() {
           },
         }
       );
+
+      console.log(response, "responseresponse>>>");
 
       const data = response.data.data;
       setValues({
@@ -152,7 +154,7 @@ function UserRegistration() {
                 error={error.role}
               >
                 <option>Select Role</option>
-                {option.map((item, index) => (
+                {roleOption.map((item, index) => (
                   <option key={index} value={item.value}>
                     {item.label}
                   </option>
