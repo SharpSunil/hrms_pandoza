@@ -9,7 +9,7 @@ import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { UserContext } from "../../../Context";
 const Page_Comp = ({ children }) => {
- const {active,setActive} = useContext(UserContext)
+  const { active, setActive } = useContext(UserContext);
 
   const location = useLocation();
   const sideBarSection = [
@@ -17,13 +17,13 @@ const Page_Comp = ({ children }) => {
       icon: <RiDashboardFill />,
       line_icon: <RiDashboardHorizontalLine />,
       path_name: "Employees",
-      path: "/",
+      path: "/employees",
     },
     {
       icon: <BsListTask />,
       line_icon: <BsListUl />,
       path_name: "Listings",
-      
+
       children: [
         {
           path_name: "Employees",
@@ -39,7 +39,7 @@ const Page_Comp = ({ children }) => {
       icon: <MdOutlineAddCircle />,
       line_icon: <MdOutlineAddCircleOutline />,
       path_name: "Add",
-    
+
       children: [
         {
           path_name: "Add Employee",
@@ -49,7 +49,10 @@ const Page_Comp = ({ children }) => {
           path_name: "Add Users",
           path: "/user-registration",
         },
-       
+        {
+          path_name: "Upload Documents",
+          path: "/uploads",
+        },
       ],
     },
   ];
@@ -80,7 +83,15 @@ const Page_Comp = ({ children }) => {
                   <div class="drop_down">
                     <div class="list">
                       {item.children.map((item, index) => (
-                        <Link  className={location.pathname === item.path ? "active dropnav" : "dropnav"} key={index} to={item.path}>
+                        <Link
+                          className={
+                            location.pathname === item.path
+                              ? "active dropnav"
+                              : "dropnav"
+                          }
+                          key={index}
+                          to={item.path}
+                        >
                           {item.path_name}
                         </Link>
                       ))}
