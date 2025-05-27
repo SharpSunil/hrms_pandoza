@@ -17,10 +17,10 @@ const Page_Comp = ({ children }) => {
       icon: <RiDashboardFill />,
       line_icon: <RiDashboardHorizontalLine />,
       path_name: "Employees",
-      path: "/",
+      path: "/employees",
     },
     {
-      icon: <BsListTask />,
+      icon: <BsListTask />, 
       line_icon: <BsListUl />,
       path_name: "Listings",
       
