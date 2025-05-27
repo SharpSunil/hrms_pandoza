@@ -15,10 +15,11 @@ import { ToastContainer } from "react-toastify";
 import UserList from "./pages/user-list/UserList";
 import EmployeeDashboard from "./pages/emp_dash/EmployeeDashboard";
 import AdminDashboard from "./pages/admin_dash/AdminDashboard";
+import Uploads from "./pages/uploads/UploadDocs";
 
 function App() {
   const { user, loading } = useContext(UserContext);
-console.log(user?.role)
+
   const Employeepages = [
     {
       component: ChangePassword,
@@ -64,6 +65,11 @@ console.log(user?.role)
       path: "/user-list",
       replace: true,
     },
+    {
+      component: Uploads,
+      path: "/uploads",
+      replace: true,
+    },
   ];
 
   if (loading) {
@@ -77,20 +83,24 @@ console.log(user?.role)
           {user ? (
             <>
               <Route path="/login" element={<Login />} replace />
-              {user?.role === "ADMIN" && AdminPages.map((item, index) => (
-                <Route
-                  key={index}
-                  path={item.path}
-                  element={<PrivateRoute>{<item.component />}</PrivateRoute>}
-                />
-              ))}
-              {user?.role === "EMPLOYEE" && Employeepages.map((item, index) => (
-                <Route
-                  key={index}
-                  path={item.path}
-                  element={<EmployeeRoute>{<item.component />}</EmployeeRoute>}
-                />
-              ))}
+              {user?.role === "ADMIN" &&
+                AdminPages.map((item, index) => (
+                  <Route
+                    key={index}
+                    path={item.path}
+                    element={<PrivateRoute>{<item.component />}</PrivateRoute>}
+                  />
+                ))}
+              {user?.role === "EMPLOYEE" &&
+                Employeepages.map((item, index) => (
+                  <Route
+                    key={index}
+                    path={item.path}
+                    element={
+                      <EmployeeRoute>{<item.component />}</EmployeeRoute>
+                    }
+                  />
+                ))}
             </>
           ) : (
             <>

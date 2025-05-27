@@ -31,7 +31,7 @@ const AddEmp = () => {
     companyName: "",
     employeeSalary: "",
     costtoCompany: "",
-    diduction: "",
+    esicNo: "",
     employeeImage: "",
     address: "",
     uanNo: "",
@@ -45,7 +45,6 @@ const AddEmp = () => {
     try {
       let response;
       let formData = new FormData();
-
 
       const data = {
         uid: values.uid,
@@ -142,8 +141,11 @@ const AddEmp = () => {
     }
   };
 
-  const { handleChange, handleSubmit, values, setValues, error } =
-    UseForm(formObj, AddEmployeeValidation, addEmployeeData);
+  const { handleChange, handleSubmit, values, setValues, error } = UseForm(
+    formObj,
+    AddEmployeeValidation,
+    addEmployeeData
+  );
 
   // get employeeDetails
   const getEmployeeDetails = async () => {
@@ -227,7 +229,6 @@ const AddEmp = () => {
                 />
               </div>
               <div class="half-row">
-              
                 <Input
                   placeholder="Employee Id"
                   label="Employee Id"
@@ -444,12 +445,12 @@ const AddEmp = () => {
             <div class="form-row">
               <div class="half-row">
                 <Input
-                  placeholder="Deduction"
-                  label="Deduction"
-                  name="diduction"
-                  value={values.diduction}
+                  placeholder="ESIC no."
+                  label="ESIC Number (if applicable)"
+                  name="esicNo"
+                  value={values.esicNo}
                   onchange={handleChange}
-                  error={error.diduction}
+                  error={error.esicNo}
                 />
               </div>
               <div class="half-row">

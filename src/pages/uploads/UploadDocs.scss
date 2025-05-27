@@ -1,0 +1,96 @@
+.uploads {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .upload-doc {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: calc(var(--unit));
+
+    .upload-wrapper {
+      border: 1px solid rgb(216, 216, 216);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: calc(var(--unit) / 2);
+      gap: calc(var(--unit));
+      width: 65%;
+      .drag-drop {
+        border: 1px dashed rgb(216, 216, 216);
+        padding: 20px;
+        width: 100%;
+        border-radius: calc(var(--unit) / 2);
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--unit));
+        align-items: center;
+        justify-content: center;
+        background: rgba(221, 236, 245, 0.349);
+
+        img {
+          width: 10%;
+        }
+      }
+
+      .upload-files {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--unit));
+        scroll-behavior: smooth;
+
+        .upload-scroll {
+          max-height: 200px;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: calc(var(--unit));
+          position: relative;
+
+          .uploded-files {
+            background: rgba(221, 236, 245, 0.349);
+            padding: 20px;
+            border-radius: calc(var(--unit) / 2);
+            position: relative;
+
+            .icon {
+              position: absolute;
+              top: 19px;
+              right: 10px;
+              cursor: pointer;
+              background: rgb(221, 236, 245);
+              padding: 3px;
+              border-radius: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: var(--accent);
+            }
+          }
+        }
+      }
+    }
+
+    .doc-list {
+      background: rgb(243, 243, 243);
+      padding: 20px;
+      border-radius: calc(var(--unit) / 2);
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      .listing {
+        display: flex;
+        gap: calc(var(--unit) / 2);
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
