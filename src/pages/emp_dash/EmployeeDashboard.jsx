@@ -2,34 +2,66 @@ import React from "react";
 import "./EmployeeDashboard.scss";
 import img1 from "../../assets/employee-dash.png";
 import { Link } from "react-router-dom";
-import { FaPrint } from "react-icons/fa";
+import { FaBalanceScale, FaCalendarCheck, FaFileInvoiceDollar, FaLayerGroup} from "react-icons/fa";
+
+import { SiGoogledocs, SiReadthedocs } from "react-icons/si";
+import { MdEditSquare } from "react-icons/md";
 function EmployeeDashboard() {
-  const carddata = [
-    {
-      id: 1,
-      icons: <FaPrint />,
-      text: "Select Salary Slip",
-      link:"dashboard",
-    },
-    {
-      id: 2,
-      icons: <FaPrint />,
-      text: "Select Salary Slip",
-      link:"dashboard",
-    },
-    {
-      id: 1,
-      icons: <FaPrint />,
-      text: "Select Salary Slip",
-      link:"dashboard",
-    },
-    {
-      id: 1,
-      icons: <FaPrint />,
-      text: "Select Salary Slip",
-      link:"dashboard",
-    },
-  ];
+ const carddata = [
+  {
+    id: 1,
+    icon: <FaBalanceScale />,
+    text: "Balance Leaves",
+    link: "/employee/leaves",
+    bgColor: "#e0f7fa",
+  },
+  {
+    id: 2,
+    icon: <FaCalendarCheck />,
+    text: "Apply for Leave",
+    link: "/employee/apply-leave",
+    bgColor: "#e0f7fa",
+  },
+  
+ 
+  {
+    id: 3,
+    icon: <SiGoogledocs />,
+    text: "View Offer Letter",
+    link: "/employee/apply-leave",
+    bgColor: "#e0f7fa",
+  },
+  {
+    id: 4,
+    icon: <FaFileInvoiceDollar />,
+    text: "Generate Salary Slip",
+    link: "/employee/salary-slip",
+    bgColor: "#e0f7fa",
+  },
+  {
+    id: 5,
+    icon: <FaLayerGroup />,
+    text: "View Increment Letter",
+    link: "/employee/apply-leave",
+    bgColor: "#e0f7fa",
+  },
+  {
+    id: 6,
+    icon: <SiReadthedocs />,
+    text: "View Another Docs",
+    link: "/employee/apply-leave",
+    bgColor: "#e0f7fa",
+  },
+  {
+    id: 6,
+    icon: <MdEditSquare />,
+    text: "Create Approval Letter",
+    link: "/employee/approval-letter",
+    bgColor: "#e0f7fa",
+  },
+
+];
+
   return (
     <>
       <div className="employee-dash-parent parent">
@@ -49,9 +81,10 @@ function EmployeeDashboard() {
             <div className="bottom-card">
               {/* <h4>Another Links </h4> */}
               {carddata.map((item, index) => (
-                <Link to={item.link} className="main-box" key={index}>
+               <Link to={item.link} className="main-box" key={index} style={{ backgroundColor: item.bgColor }}>
+
                   <div className="icon">
-                    {item.icons}
+                    {item.icon}
                   </div>
                   <div className="content-box">
                     <div className="text">{item.text}</div>
@@ -61,13 +94,13 @@ function EmployeeDashboard() {
               ))}
             </div>
           </div>
-          <div className="right-dash">
+          {/* <div className="right-dash">
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis
               assumenda, molestiae reprehenderit aspernatur ut sequi id beatae
               illum illo omnis?
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

@@ -16,6 +16,7 @@ import UserList from "./pages/user-list/UserList";
 import EmployeeDashboard from "./pages/emp_dash/EmployeeDashboard";
 import AdminDashboard from "./pages/admin_dash/AdminDashboard";
 import Uploads from "./pages/uploads/UploadDocs";
+import ApprovalLetter from "./pages/emp_dash/ApprovalLetter";
 
 function App() {
   const { user, loading } = useContext(UserContext);
@@ -30,6 +31,11 @@ function App() {
     {
       component: EmployeeDashboard,
       path: "/",
+      replace: true,
+    },
+    {
+      component: ApprovalLetter,
+      path: "/employee/approval-letter",
       replace: true,
     },
   ];
