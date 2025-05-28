@@ -18,12 +18,11 @@ const ApprovalLetter = () => {
           <div className="letter-box">
             <div className="left-form">
             <form action="">
-              <label>Date</label>
+             
               <input type="date" />
-              <label>Subject</label>
-              <textarea rows={2} columns={3}></textarea>
-              <label htmlFor="">Your Sincerely</label>
-              <input type="text" />
+              
+              <textarea rows={2} columns={3} placeholder="Enter Subject"></textarea>
+              <input type="text" placeholder="" />
              
             </form>
             </div>
@@ -31,7 +30,7 @@ const ApprovalLetter = () => {
               
                {data.map((item,index)=>(
                  <>
-                    <div className="date">{item.date}</div>
+                    <div className="date" key={index}>{item.date}</div>
                     <p className="main-info">To, <br></br>Prajakta Marwaha <br></br> Director<br></br>Pandoza Solutions Pvt Ltd <br></br>2014 - 2016, 10 Biz Park, Viman Nagar,<br></br>Pune, Maharashtra 411014
                         
                     </p>
